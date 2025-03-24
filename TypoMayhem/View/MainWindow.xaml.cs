@@ -12,15 +12,15 @@ using TypoMayhem.ViewModel;
 
 namespace TypoMayhem
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        private TypingViewModel _viewModel = new TypingViewModel();
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
+	{
+		private TypingViewModel _viewModel = new TypingViewModel();
 		public MainWindow()
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 			DataContext = _viewModel;
 		}
 
@@ -29,6 +29,11 @@ namespace TypoMayhem
 			Key key = e.Key;
 
 			if (key == Key.LeftShift || key == Key.RightShift) return;
+
+			if (_viewModel.CurrentPosition < _viewModel.CurrentText?.Length)
+			{
+				char actualCharacter = _viewModel.GetActualCharacter(Keyboard.PrimaryDevice, key);
+			}
 		}
 	}
 }

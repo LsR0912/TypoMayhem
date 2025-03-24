@@ -70,6 +70,14 @@ namespace TypoMayhem.ViewModel
 		{
 			_timer?.Stop();
 		}
+		public char GetActualCharacter(KeyboardDevice keyboard ,Key key)
+		{
+			if (key == Key.Space) return ' ';
+
+			bool isShiftPressed = keyboard.IsKeyDown(Key.LeftShift) || keyboard.IsKeyDown(Key.RightShift);
+			char character = key.ToString().ToLower()[0];
+			return isShiftPressed ? char.ToUpper(character) : char.ToLower(character);
+		}
 		private void GenerateNewSentence()
 		{
 			CurrentText = TextGenerator.GenerateRandomCourseText(10);
