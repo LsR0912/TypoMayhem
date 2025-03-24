@@ -19,6 +19,7 @@ namespace TypoMayhem.ViewModel
 		private string? _currentText;
 		private TimeSpan _remainingTime;
 		private DispatcherTimer? _timer;
+		private DateTime _startTime;
 
 		// Array for Sessiondurations
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
@@ -28,6 +29,8 @@ namespace TypoMayhem.ViewModel
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
 		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
 		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
+		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
+
 
 		// Constructor
 		public TypingViewModel()
