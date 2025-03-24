@@ -63,6 +63,11 @@
         </Border>
         <StatusBar Style="{StaticResource StatusbarStyle}">
             <StatusBarItem>
+                <TextBlock x:Name="txtRemainingTime"
+                           Text="{Binding RemainingTime, StringFormat='{}{0:mm\\:ss}'}"
+                           Style="{StaticResource RemainingTimeStyle}"/>
+            </StatusBarItem>
+            <StatusBarItem>
                 <TextBlock Text="Status Bar" />
             </StatusBarItem>
         </StatusBar>
