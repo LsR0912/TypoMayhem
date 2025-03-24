@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace TypoMayhem.ViewModel
 {
@@ -14,6 +15,7 @@ namespace TypoMayhem.ViewModel
 		private int _sessionDuration;
 		private string? _currentText;
 		private TimeSpan _remainingTime;
+		private DispatcherTimer? _timer;
 
 		// Array for Sessiondurations
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
