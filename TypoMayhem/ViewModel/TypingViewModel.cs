@@ -12,8 +12,9 @@ namespace TypoMayhem.ViewModel
 	{
 		// Variables
 		// Array for Sessiondurations
-		private int[] _sessionDurations = new int[] { 1,2,3,4,5,10 };
+		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
 		// Properties
+		public int[] SessionDurations => _sessionDurations;
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
 		// Methods
