@@ -51,10 +51,12 @@ namespace TypoMayhem.ViewModel
 		// Methods
 		private void StartTyping(object? sender)
 		{
-
+			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
+			_timer?.Start();
 		}
 		private void StopTyping(object? sender)
 		{
+			_timer?.Stop();
 		}
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
