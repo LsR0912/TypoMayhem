@@ -21,9 +21,15 @@ namespace TypoMayhem
 		public MainWindow()
 		{
 			InitializeComponent();
+			InitialSettings();
 			DataContext = _viewModel;
 		}
-
+		private void InitialSettings()
+		{
+			btnStart.Focusable = false;
+			btnStop.Focusable = false;
+			cbSessionDuration.Focusable = false;
+		}
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
 			Key key = e.Key;
