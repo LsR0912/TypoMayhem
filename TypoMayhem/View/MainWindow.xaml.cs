@@ -23,5 +23,12 @@ namespace TypoMayhem
             InitializeComponent();
 			DataContext = _viewModel;
 		}
-    }
+
+		protected override void OnKeyDown(KeyEventArgs e)
+		{
+			Key key = e.Key;
+
+			if (key == Key.LeftShift || key == Key.RightShift) return;
+		}
+	}
 }
