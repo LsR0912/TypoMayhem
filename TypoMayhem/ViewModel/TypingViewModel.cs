@@ -11,10 +11,15 @@ namespace TypoMayhem.ViewModel
 	public class TypingViewModel : INotifyPropertyChanged
 	{
 		// Variables
+		private int _sessionDuration;
+
 		// Array for Sessiondurations
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
 		// Properties
 		public int[] SessionDurations => _sessionDurations;
+		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
+
+
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
 		// Methods
