@@ -106,18 +106,17 @@ namespace TypoMayhem.ViewModel
 
 		public void ValidateKey(char actualChar, char expectedChar)
 		{
+			// Check this logic, it seems not to be right
 			if (actualChar == expectedChar)
 			{
 				CurrentPosition++;
-				IncorrectPosition = -1; // Reset incorrect position
 				UserInput += actualChar;
 			}
 			else
 			{
 				if (IncorrectPosition != CurrentPosition)
 				{
-					IncorrectPosition = CurrentPosition;
-					IncorrectPositions.Add(CurrentPosition);
+					IncorrectPositions.Add(IncorrectPosition);
 				}
 			}
 		}
