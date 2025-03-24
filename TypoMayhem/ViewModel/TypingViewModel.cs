@@ -60,6 +60,7 @@ namespace TypoMayhem.ViewModel
 		{
 			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
 			_timer?.Start();
+			GenerateNewSentence();
 		}
 		private void StopTyping(object? sender)
 		{
