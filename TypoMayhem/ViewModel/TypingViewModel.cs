@@ -17,6 +17,7 @@ namespace TypoMayhem.ViewModel
 		// Variables
 		private int _sessionDuration;
 		private string? _currentText;
+		private bool _isTyping;
 		private TimeSpan _remainingTime;
 		private DispatcherTimer? _timer;
 		private DateTime _startTime;
@@ -28,6 +29,7 @@ namespace TypoMayhem.ViewModel
 		public int[] SessionDurations => _sessionDurations;
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
 		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
+		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
 		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
 		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
 
