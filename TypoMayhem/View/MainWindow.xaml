@@ -12,7 +12,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StatusBar Grid.Row="2">
+        
+        <StatusBar Style="{StaticResource StatusbarStyle}">
             <StatusBarItem>
                 <TextBlock Text="Status Bar" />
             </StatusBarItem>
