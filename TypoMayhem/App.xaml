@@ -4,6 +4,55 @@
              xmlns:local="clr-namespace:TypoMayhem"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF6A00" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" Opacity="0.5"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StartStopStackpanel" TargetType="StackPanel">
+            <Setter Property="Grid.Row" Value="0"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        <Style x:Key="SessionDurationCombobox" TargetType="ComboBox">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="SelectedItem" Value="0"/>
+        </Style>
+        <Style x:Key="StatusbarStyle" TargetType="StatusBar">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Grid.Row" Value="2" />
+            <Setter Property="Background" Value="#FFD6D6D6" />
+        </Style>
+        <Style x:Key="RemainingTimeStyle" TargetType="TextBlock">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="240,10,0,0"/>
+        </Style>
+        <Style x:Key="TextMainStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
     </Application.Resources>
 </Application>
