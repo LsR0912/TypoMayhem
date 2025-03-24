@@ -99,6 +99,7 @@ namespace TypoMayhem.ViewModel
 			else
 			{
 				GenerateNewSentence();
+				IncorrectPositions.Clear();
 				CurrentPosition = 0;
 				UpdateDisplay(ref textBlock);
 			}
@@ -106,7 +107,6 @@ namespace TypoMayhem.ViewModel
 
 		public void ValidateKey(char actualChar, char expectedChar)
 		{
-			// Check this logic, it seems not to be right
 			if (actualChar == expectedChar)
 			{
 				CurrentPosition++;
@@ -114,10 +114,8 @@ namespace TypoMayhem.ViewModel
 			}
 			else
 			{
-				if (IncorrectPosition != CurrentPosition)
-				{
-					IncorrectPositions.Add(IncorrectPosition);
-				}
+				IncorrectPosition = CurrentPosition;
+				IncorrectPositions.Add(IncorrectPosition);
 			}
 		}
 		public void UpdateDisplay(ref TextBlock textBlock)
