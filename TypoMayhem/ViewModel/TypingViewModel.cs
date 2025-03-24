@@ -26,6 +26,11 @@ namespace TypoMayhem.ViewModel
 		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
 		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
 
+		// Constructor
+		public TypingViewModel()
+		{
+			
+		}
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
 
