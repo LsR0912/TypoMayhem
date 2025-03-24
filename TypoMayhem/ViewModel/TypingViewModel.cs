@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace TypoMayhem.ViewModel
@@ -36,11 +37,6 @@ namespace TypoMayhem.ViewModel
 			_timer.Tick += OnTimerTick;
 		}
 
-		private void OnTimerTick(object? sender, EventArgs e)
-		{
-			throw new NotImplementedException();
-		}
-
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -49,13 +45,24 @@ namespace TypoMayhem.ViewModel
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
-
 		private bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
 		{
 			if (EqualityComparer<T>.Default.Equals(field, value)) return false;
 			field = value;
 			OnPropertyChanged(propertyName);
 			return true;
+		}
+		private void OnTimerTick(object? sender, EventArgs e)
+		{
+			if (RemainingTime.TotalSeconds > 0)
+			{
+				RemainingTime = RemainingTime.Subtract(TimeSpan.FromSeconds(1));
+			}
+			else
+			{
+				if (_timer != null) _timer.Stop();
+				MessageBox.Show("Time's up!");
+			}
 		}
 	}
 }
