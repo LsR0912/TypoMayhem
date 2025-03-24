@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TypoMayhem.Commands;
 
 namespace TypoMayhem.ViewModel
 {
@@ -31,6 +32,8 @@ namespace TypoMayhem.ViewModel
 		// Constructor
 		public TypingViewModel()
 		{
+			StartTypingCommand = new RelayCommand(StartTyping);
+			StopTypingCommand = new RelayCommand(StopTyping);
 			_timer = new DispatcherTimer()
 			{
 				Interval = TimeSpan.FromSeconds(1)
@@ -46,6 +49,13 @@ namespace TypoMayhem.ViewModel
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		// Methods
+		private void StartTyping(object? sender)
+		{
+
+		}
+		private void StopTyping(object? sender)
+		{
+		}
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
