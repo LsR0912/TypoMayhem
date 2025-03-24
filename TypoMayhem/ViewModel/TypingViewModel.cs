@@ -29,7 +29,10 @@ namespace TypoMayhem.ViewModel
 		// Constructor
 		public TypingViewModel()
 		{
-			
+			_timer = new DispatcherTimer()
+			{
+				Interval = TimeSpan.FromSeconds(1)
+			};
 		}
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
