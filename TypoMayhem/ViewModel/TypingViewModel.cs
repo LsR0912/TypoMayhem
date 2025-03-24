@@ -12,16 +12,19 @@ namespace TypoMayhem.ViewModel
 	{
 		// Variables
 		private int _sessionDuration;
+		private string? _currentText;
 
 		// Array for Sessiondurations
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
+
 		// Properties
 		public int[] SessionDurations => _sessionDurations;
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
-
+		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
 
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
+
 		// Methods
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
