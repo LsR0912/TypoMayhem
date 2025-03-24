@@ -23,6 +23,17 @@
                     Command="{Binding StopTypingCommand}"
                     Style="{StaticResource ButtonStyle}"/>
         </StackPanel>
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <StackPanel HorizontalAlignment="Right">
+                <Label Content="Duration:"/>
+                <ComboBox x:Name="cbSessionDuration" 
+                          ItemsSource="{Binding SessionDurations}"
+                          SelectedValue="{Binding SessionDuration, Mode=TwoWay}">
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
         <StatusBar Style="{StaticResource StatusbarStyle}">
             <StatusBarItem>
                 <TextBlock Text="Status Bar" />
