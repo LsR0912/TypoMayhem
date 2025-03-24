@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace TypoMayhem.ViewModel
@@ -36,6 +37,10 @@ namespace TypoMayhem.ViewModel
 			};
 			_timer.Tick += OnTimerTick;
 		}
+
+		// Commands
+		public ICommand StartTypingCommand { get; set; }
+		public ICommand StopTypingCommand { get; set; }
 
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
