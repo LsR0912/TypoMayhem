@@ -65,6 +65,10 @@ namespace TypoMayhem.ViewModel
 		{
 			_timer?.Stop();
 		}
+		private void GenerateNewSentence()
+		{
+			CurrentText = TextGenerator.GenerateRandomCourseText(10);
+		}
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
