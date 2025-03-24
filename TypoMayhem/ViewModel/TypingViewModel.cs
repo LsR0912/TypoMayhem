@@ -10,8 +10,13 @@ namespace TypoMayhem.ViewModel
 {
 	public class TypingViewModel : INotifyPropertyChanged
 	{
+		// Variables
+		// Array for Sessiondurations
+		private int[] _sessionDurations = new int[] { 1,2,3,4,5,10 };
+		// Properties
+		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
-
+		// Methods
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
