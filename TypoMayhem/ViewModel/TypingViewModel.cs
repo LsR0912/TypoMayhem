@@ -79,11 +79,14 @@ namespace TypoMayhem.ViewModel
 		public void ProcessKeyPress(KeyboardDevice keyboard, Key key)
 		{
 			bool isShiftPressed = keyboard.IsKeyDown(Key.LeftShift) || keyboard.IsKeyDown(Key.RightShift);
-			char character = key.ToString().ToLower()[0];
-			if (key == Key.Space) character = ' ';
-			char actualChar = isShiftPressed ? char.ToUpper(character) : char.ToLower(character);
-			char expectedChar = CurrentText?[CurrentPosition] ?? string.Empty[0];
-			ValidateKey(actualChar, expectedChar);
+			char character = key == Key.Space ? ' ' : key.ToString().ToLower()[0];
+			char actualChar = isShiftPressed ? char.ToUpper(character) : character;
+
+			if (CurrentText != null && CurrentPosition < CurrentText.Length)
+			{
+				char expectedChar = CurrentText[CurrentPosition];
+				ValidateKey(actualChar, expectedChar);
+			}
 		}
 
 		public void ValidateKey(char actualChar, char expectedChar)
