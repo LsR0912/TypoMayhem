@@ -40,6 +40,7 @@ namespace TypoMayhem.ViewModel
 		{
 			StartTypingCommand = new RelayCommand(StartTyping);
 			StopTypingCommand = new RelayCommand(StopTyping);
+			SessionDuration = _sessionDurations[0];
 			_timer = new DispatcherTimer()
 			{
 				Interval = TimeSpan.FromSeconds(1)
