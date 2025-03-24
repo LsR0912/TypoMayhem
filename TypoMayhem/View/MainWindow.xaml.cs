@@ -32,8 +32,7 @@ namespace TypoMayhem
 
 			if (_viewModel.CurrentPosition < _viewModel.CurrentText?.Length)
 			{
-				char actualCharacter = _viewModel.GetActualCharacter(Keyboard.PrimaryDevice, key);
-				char expectedCharacter = _viewModel.CurrentText[_viewModel.CurrentPosition];
+				_viewModel.ProcessKeyPress(Keyboard.PrimaryDevice, key);
 			}
 		}
 	}

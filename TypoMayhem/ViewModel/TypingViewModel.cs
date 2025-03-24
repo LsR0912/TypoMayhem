@@ -19,6 +19,7 @@ namespace TypoMayhem.ViewModel
 		private int _sessionDuration;
 		private int _currentPosition;
 		private string? _currentText;
+		private char _typedCharacter;
 		private bool _isTyping;
 		private TimeSpan _remainingTime;
 		private DispatcherTimer? _timer;
@@ -33,6 +34,7 @@ namespace TypoMayhem.ViewModel
 		public List<int> IncorrectPositions { get; set; } = new List<int>();
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
 		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
+		public char TypedCharacter { get => _typedCharacter; set => _typedCharacter = value; }
 		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
 		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
 		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
@@ -70,13 +72,26 @@ namespace TypoMayhem.ViewModel
 		{
 			_timer?.Stop();
 		}
-		public char GetActualCharacter(KeyboardDevice keyboard ,Key key)
+		public void ProcessKeyPress(KeyboardDevice keyboard, Key key)
 		{
-			if (key == Key.Space) return ' ';
-
 			bool isShiftPressed = keyboard.IsKeyDown(Key.LeftShift) || keyboard.IsKeyDown(Key.RightShift);
 			char character = key.ToString().ToLower()[0];
-			return isShiftPressed ? char.ToUpper(character) : char.ToLower(character);
+			if (key == Key.Space) character = ' ';
+			char actualChar = isShiftPressed ? char.ToUpper(character) : char.ToLower(character);
+			char expectedChar = CurrentText?[CurrentPosition] ?? string.Empty[0];
+			ValidateKey(actualChar, expectedChar);
+		}
+
+		public void ValidateKey(char actualChar, char expectedChar)
+		{
+			if (actualChar == expectedChar)
+			{
+				CurrentPosition++;
+			}
+			else
+			{
+				IncorrectPositions.Add(CurrentPosition);
+			}
 		}
 		private void GenerateNewSentence()
 		{
