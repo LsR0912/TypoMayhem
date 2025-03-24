@@ -17,6 +17,7 @@ namespace TypoMayhem.ViewModel
 	{
 		// Variables
 		private int _sessionDuration;
+		private int _currentPosition;
 		private string? _currentText;
 		private bool _isTyping;
 		private TimeSpan _remainingTime;
@@ -28,6 +29,7 @@ namespace TypoMayhem.ViewModel
 
 		// Properties
 		public int[] SessionDurations => _sessionDurations;
+		public int CurrentPosition { get => _currentPosition; set => SetProperty(ref _currentPosition, value); }
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
 		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
 		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
@@ -46,7 +48,7 @@ namespace TypoMayhem.ViewModel
 				Interval = TimeSpan.FromSeconds(1)
 			};
 			_timer.Tick += OnTimerTick;
-			TextGenerator.CourseText = ["The","quick","brown","fox","jumps","over","the","lazy","dog."];
+			TextGenerator.CourseText = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog."];
 		}
 
 		// Commands
