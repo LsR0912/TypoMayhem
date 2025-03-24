@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using TypoMayhem.Commands;
+using TypoMayhem.Data.Helpers;
 
 namespace TypoMayhem.ViewModel
 {
@@ -44,6 +45,7 @@ namespace TypoMayhem.ViewModel
 				Interval = TimeSpan.FromSeconds(1)
 			};
 			_timer.Tick += OnTimerTick;
+			TextGenerator.CourseText = ["The","quick","brown","fox","jumps","over","the","lazy","dog."];
 		}
 
 		// Commands
