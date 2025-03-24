@@ -34,6 +34,33 @@
                 </ComboBox>
             </StackPanel>
         </StackPanel>
+        <Border x:Name="animatedBorder"
+                Style="{StaticResource AnimatedBorderStyle}">
+            <Border.Background>
+                <SolidColorBrush Color="#FFF3E5F5"/>
+            </Border.Background>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <!--Check definition of Storyboard-->
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:15" 
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                            From="#FFF3E5F5" To="#FFC3E5F5" 
+                                            AutoReverse="True" 
+                                            RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+            <TextBlock x:Name="txtMain" 
+                       Text="{Binding CurrentText}" 
+                       Style="{StaticResource TextMainStyle}">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" Opacity="0.5"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Border>
         <StatusBar Style="{StaticResource StatusbarStyle}">
             <StatusBarItem>
                 <TextBlock Text="Status Bar" />
