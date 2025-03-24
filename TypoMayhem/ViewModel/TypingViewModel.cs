@@ -59,7 +59,7 @@ namespace TypoMayhem.ViewModel
 				Interval = TimeSpan.FromSeconds(1)
 			};
 			_timer.Tick += OnTimerTick;
-			TextGenerator.CourseText = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog."];
+			TextGenerator.CourseText = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
 		}
 
 		// Commands
