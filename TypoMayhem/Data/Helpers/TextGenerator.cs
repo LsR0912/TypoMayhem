@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace TypoMayhem.Data.Helpers
 {
-	public class TextGenerator
+	public static class TextGenerator
 	{
+		// Properties
+		public static string[]? CourseText { get;  set; }
+
+		// Methods
+		public static string GenerateRandomCourseText(int wordCount)
+		{
+			Random rnd = new Random();
+			return string.Join(" ", Enumerable.Range(0, wordCount).Select(i => CourseText?[rnd.Next(CourseText.Length)]));
+		}
 	}
 }
