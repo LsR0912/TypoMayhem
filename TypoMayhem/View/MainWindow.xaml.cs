@@ -33,6 +33,7 @@ namespace TypoMayhem
 			if (_viewModel.CurrentPosition < _viewModel.CurrentText?.Length)
 			{
 				_viewModel.ProcessKeyPress(Keyboard.PrimaryDevice, key);
+				_viewModel.UpdateDisplay(ref txtMain);
 			}
 		}
 	}

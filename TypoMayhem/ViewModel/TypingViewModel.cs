@@ -6,7 +6,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Threading;
 using TypoMayhem.Commands;
 using TypoMayhem.Data.Helpers;
@@ -105,6 +109,42 @@ namespace TypoMayhem.ViewModel
 					IncorrectPositions.Add(CurrentPosition);
 				}
 			}
+		}
+		public void UpdateDisplay(ref TextBlock textBlock)
+		{
+			textBlock.Inlines.Clear();
+
+			if (CurrentText == null) return;
+
+			for (int i = 0; i < CurrentText.Length; i++)
+			{
+				var backgroundBrush = GetBackgroundBrush(i);
+				var run = new Run(CurrentText[i].ToString()) { Background = backgroundBrush };
+				textBlock.Inlines.Add(run);
+			}
+		}
+		private Brush GetBackgroundBrush(int position)
+		{
+			if (position < CurrentPosition)
+			{
+				return IncorrectPositions.Contains(position) ? Brushes.Red : Brushes.LightGreen;
+			}
+			return position == CurrentPosition ? Brushes.Yellow : Brushes.Transparent;
+		}
+		private Border CreateTextBorder(Run run, Brush background)
+		{
+			return new Border
+			{
+				Child = new TextBlock(run),
+				Background = background,
+				Effect = new DropShadowEffect
+				{
+					Color = Colors.Wheat,
+					Direction = 340,
+					ShadowDepth = 2,
+					Opacity = 0.8
+				}
+			};
 		}
 		private void GenerateNewSentence()
 		{
