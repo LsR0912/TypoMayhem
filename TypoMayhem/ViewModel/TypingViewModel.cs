@@ -33,7 +33,14 @@ namespace TypoMayhem.ViewModel
 			{
 				Interval = TimeSpan.FromSeconds(1)
 			};
+			_timer.Tick += OnTimerTick;
 		}
+
+		private void OnTimerTick(object? sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
 
