@@ -91,10 +91,16 @@ namespace TypoMayhem.ViewModel
 			if (actualChar == expectedChar)
 			{
 				CurrentPosition++;
+				IncorrectPosition = -1; // Reset incorrect position
+				UserInput += actualChar;
 			}
 			else
 			{
-				IncorrectPositions.Add(CurrentPosition);
+				if (IncorrectPosition != CurrentPosition)
+				{
+					IncorrectPosition = CurrentPosition;
+					IncorrectPositions.Add(CurrentPosition);
+				}
 			}
 		}
 		private void GenerateNewSentence()
