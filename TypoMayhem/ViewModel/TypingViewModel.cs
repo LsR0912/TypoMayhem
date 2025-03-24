@@ -120,7 +120,8 @@ namespace TypoMayhem.ViewModel
 			{
 				var backgroundBrush = GetBackgroundBrush(i);
 				var run = new Run(CurrentText[i].ToString()) { Background = backgroundBrush };
-				textBlock.Inlines.Add(run);
+				var border = CreateTextBorder(run, backgroundBrush);
+				textBlock.Inlines.Add(new InlineUIContainer(border));
 			}
 		}
 		private Brush GetBackgroundBrush(int position)
