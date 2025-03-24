@@ -30,6 +30,7 @@ namespace TypoMayhem.ViewModel
 		// Properties
 		public int[] SessionDurations => _sessionDurations;
 		public int CurrentPosition { get => _currentPosition; set => SetProperty(ref _currentPosition, value); }
+		public List<int> IncorrectPositions { get; set; } = new List<int>();
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
 		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
 		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
