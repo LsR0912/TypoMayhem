@@ -12,7 +12,15 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
+        <StackPanel Style="{StaticResource StartStopStackpanel}">
+            <Button x:Name="btnStart"
+                    Content="Start"
+                    Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="btnStop"
+                    Content="Stop"
+                    Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
         <StatusBar Style="{StaticResource StatusbarStyle}">
             <StatusBarItem>
                 <TextBlock Text="Status Bar" />
