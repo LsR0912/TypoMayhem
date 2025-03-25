@@ -23,6 +23,7 @@ namespace TypoMayhem
 			InitializeComponent();
 			InitialSettings();
 			DataContext = _viewModel;
+			WindowStartupLocation = WindowStartupLocation.CenterScreen;
 		}
 		private void InitialSettings()
 		{
