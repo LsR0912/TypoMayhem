@@ -77,7 +77,7 @@ namespace TypoMayhem.ViewModel
 			_isTyping = true;
 			CurrentPosition = 0;
 			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
-			_timer?.Start();
+			//_timer?.Start();
 			GenerateNewSentence();
 			UpdateDisplay();
 		}
@@ -101,6 +101,7 @@ namespace TypoMayhem.ViewModel
 			{
 				if (CurrentPosition < CurrentText?.Length)
 				{
+					_timer?.Start();
 					bool isShiftPressed = keyboard.IsKeyDown(Key.LeftShift) || keyboard.IsKeyDown(Key.RightShift);
 					char character = key == Key.Space ? ' ' : key.ToString().ToLower()[0];
 					char actualChar = isShiftPressed ? char.ToUpper(character) : character;
@@ -121,7 +122,6 @@ namespace TypoMayhem.ViewModel
 				}
 			}
 		}
-
 		public void ValidateKey(char actualChar, char expectedChar)
 		{
 			if (actualChar == expectedChar)
@@ -175,6 +175,7 @@ namespace TypoMayhem.ViewModel
 		private void GenerateNewSentence()
 		{
 			CurrentText = TextGenerator.GenerateRandomCourseText(10);
+			IncorrectPositions.Clear();
 		}
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
