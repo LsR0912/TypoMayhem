@@ -52,7 +52,7 @@ namespace TypoMayhem.ViewModel
 		// Constructor
 		public TypingViewModel(TextBlock textBlock)
 		{
-			StartTypingCommand = new RelayCommand(StartTyping,CanExecute);
+			StartTypingCommand = new RelayCommand(StartTyping, CanExecute);
 			StopTypingCommand = new RelayCommand(StopTyping);
 			SessionDuration = _sessionDurations[0];
 			_timer = new DispatcherTimer()
@@ -97,26 +97,28 @@ namespace TypoMayhem.ViewModel
 		}
 		public void ProcessKeyPress(KeyboardDevice keyboard, Key key)
 		{
-			if (CurrentPosition < CurrentText?.Length)
+			if (_isTyping == true)
 			{
-
-				bool isShiftPressed = keyboard.IsKeyDown(Key.LeftShift) || keyboard.IsKeyDown(Key.RightShift);
-				char character = key == Key.Space ? ' ' : key.ToString().ToLower()[0];
-				char actualChar = isShiftPressed ? char.ToUpper(character) : character;
-
-				if (CurrentText != null && CurrentPosition < CurrentText.Length)
+				if (CurrentPosition < CurrentText?.Length)
 				{
-					char expectedChar = CurrentText[CurrentPosition];
-					ValidateKey(actualChar, expectedChar);
+					bool isShiftPressed = keyboard.IsKeyDown(Key.LeftShift) || keyboard.IsKeyDown(Key.RightShift);
+					char character = key == Key.Space ? ' ' : key.ToString().ToLower()[0];
+					char actualChar = isShiftPressed ? char.ToUpper(character) : character;
+
+					if (CurrentText != null && CurrentPosition < CurrentText.Length)
+					{
+						char expectedChar = CurrentText[CurrentPosition];
+						ValidateKey(actualChar, expectedChar);
+						UpdateDisplay();
+					}
+				}
+				else
+				{
+					GenerateNewSentence();
+					IncorrectPositions.Clear();
+					CurrentPosition = 0;
 					UpdateDisplay();
 				}
-			}
-			else
-			{
-				GenerateNewSentence();
-				IncorrectPositions.Clear();
-				CurrentPosition = 0;
-				UpdateDisplay();
 			}
 		}
 
@@ -200,6 +202,7 @@ namespace TypoMayhem.ViewModel
 			{
 				if (_timer != null) _timer.Stop();
 				MessageBox.Show("Time's up!");
+				StopTyping(null);
 			}
 		}
 	}
