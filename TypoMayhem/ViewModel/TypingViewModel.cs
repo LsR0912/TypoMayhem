@@ -74,6 +74,7 @@ namespace TypoMayhem.ViewModel
 		// Methods
 		private void StartTyping(object? sender)
 		{
+			_isTyping = true;
 			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
 			_timer?.Start();
 			GenerateNewSentence();
@@ -81,6 +82,7 @@ namespace TypoMayhem.ViewModel
 		private void StopTyping(object? sender)
 		{
 			_timer?.Stop();
+			_isTyping = false;
 			ResetDisplay();
 		}
 		private void ResetDisplay()
