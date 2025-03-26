@@ -81,6 +81,13 @@ namespace TypoMayhem.ViewModel
 		private void StopTyping(object? sender)
 		{
 			_timer?.Stop();
+			ResetDisplay();
+		}
+		private void ResetDisplay()
+		{
+			CurrentPosition = 0;
+			IncorrectPositions.Clear();
+			UpdateDisplay();
 		}
 		public void ProcessKeyPress(KeyboardDevice keyboard, Key key)
 		{
