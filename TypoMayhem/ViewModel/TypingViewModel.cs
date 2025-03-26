@@ -82,7 +82,7 @@ namespace TypoMayhem.ViewModel
 		{
 			_timer?.Stop();
 		}
-		public void ProcessKeyPress(KeyboardDevice keyboard, Key key, ref TextBlock textBlock)
+		public void ProcessKeyPress(KeyboardDevice keyboard, Key key)
 		{
 			if (CurrentPosition < CurrentText?.Length)
 			{
@@ -95,7 +95,7 @@ namespace TypoMayhem.ViewModel
 				{
 					char expectedChar = CurrentText[CurrentPosition];
 					ValidateKey(actualChar, expectedChar);
-					UpdateDisplay(ref textBlock);
+					UpdateDisplay();
 				}
 			}
 			else
@@ -103,7 +103,7 @@ namespace TypoMayhem.ViewModel
 				GenerateNewSentence();
 				IncorrectPositions.Clear();
 				CurrentPosition = 0;
-				UpdateDisplay(ref textBlock);
+				UpdateDisplay();
 			}
 		}
 
@@ -120,9 +120,9 @@ namespace TypoMayhem.ViewModel
 				IncorrectPositions.Add(IncorrectPosition);
 			}
 		}
-		public void UpdateDisplay(ref TextBlock textBlock)
+		public void UpdateDisplay()
 		{
-			textBlock.Inlines.Clear();
+			_textBlock.Inlines.Clear();
 
 			if (CurrentText == null) return;
 
@@ -131,7 +131,7 @@ namespace TypoMayhem.ViewModel
 				var backgroundBrush = GetBackgroundBrush(i);
 				var run = new Run(CurrentText[i].ToString()) { Background = backgroundBrush };
 				var border = CreateTextBorder(run, backgroundBrush);
-				textBlock.Inlines.Add(new InlineUIContainer(border));
+				_textBlock.Inlines.Add(new InlineUIContainer(border));
 			}
 		}
 		private Brush GetBackgroundBrush(int position)
