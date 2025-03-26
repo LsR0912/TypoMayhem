@@ -17,7 +17,7 @@ namespace TypoMayhem
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private TypingViewModel _viewModel = new TypingViewModel();
+		private TypingViewModel? _viewModel;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -27,6 +27,7 @@ namespace TypoMayhem
 		}
 		private void InitialSettings()
 		{
+			_viewModel = new TypingViewModel(txtMain);
 			btnStart.Focusable = false;
 			btnStop.Focusable = false;
 			cbSessionDuration.Focusable = false;
