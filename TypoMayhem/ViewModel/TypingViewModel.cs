@@ -30,6 +30,7 @@ namespace TypoMayhem.ViewModel
 		private TimeSpan _remainingTime;
 		private DispatcherTimer? _timer;
 		private DateTime _startTime;
+		private TextBlock _textBlock;
 
 		// Array for Sessiondurations
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
@@ -49,7 +50,7 @@ namespace TypoMayhem.ViewModel
 
 
 		// Constructor
-		public TypingViewModel()
+		public TypingViewModel(TextBlock textBlock)
 		{
 			StartTypingCommand = new RelayCommand(StartTyping);
 			StopTypingCommand = new RelayCommand(StopTyping);
@@ -60,6 +61,7 @@ namespace TypoMayhem.ViewModel
 			};
 			_timer.Tick += OnTimerTick;
 			TextGenerator.CourseText = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
+			_textBlock = textBlock;
 		}
 
 		// Commands
