@@ -179,6 +179,11 @@ namespace TypoMayhem.ViewModel
 			OnPropertyChanged(propertyName);
 			return true;
 		}
+		private bool CanExecute(object? parameter)
+		{
+			if (_isTyping) return false;
+			else return true;
+		}
 		private void OnTimerTick(object? sender, EventArgs e)
 		{
 			if (RemainingTime.TotalSeconds > 0)
