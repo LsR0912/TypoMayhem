@@ -75,19 +75,23 @@ namespace TypoMayhem.ViewModel
 		private void StartTyping(object? sender)
 		{
 			_isTyping = true;
+			CurrentPosition = 0;
 			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
 			_timer?.Start();
 			GenerateNewSentence();
+			UpdateDisplay();
 		}
 		private void StopTyping(object? sender)
 		{
 			_timer?.Stop();
 			_isTyping = false;
+			RemainingTime = TimeSpan.Zero;
 			ResetDisplay();
 		}
 		private void ResetDisplay()
 		{
-			CurrentPosition = 0;
+			CurrentText = "Press Start to begin a new Session.";
+			CurrentPosition = -1;
 			IncorrectPositions.Clear();
 			UpdateDisplay();
 		}
