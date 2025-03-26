@@ -52,7 +52,7 @@ namespace TypoMayhem.ViewModel
 		// Constructor
 		public TypingViewModel(TextBlock textBlock)
 		{
-			StartTypingCommand = new RelayCommand(StartTyping);
+			StartTypingCommand = new RelayCommand(StartTyping,CanExecute);
 			StopTypingCommand = new RelayCommand(StopTyping);
 			SessionDuration = _sessionDurations[0];
 			_timer = new DispatcherTimer()
