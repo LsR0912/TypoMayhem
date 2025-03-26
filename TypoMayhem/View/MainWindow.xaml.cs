@@ -38,7 +38,7 @@ namespace TypoMayhem
 
 			if (key == Key.LeftShift || key == Key.RightShift) return;
 
-			_viewModel.ProcessKeyPress(Keyboard.PrimaryDevice, key, ref txtMain);
+			_viewModel.ProcessKeyPress(Keyboard.PrimaryDevice, key);
 		}
 	}
 }
