@@ -152,7 +152,10 @@ namespace TypoMayhem.ViewModel
 		}
 		private void CalculateSignsPerMinute()
 		{
-			SignsPerMinute = Convert.ToDouble(UserInput?.Length / (SessionDuration));
+			if (UserInput != null && SessionDuration > 0)
+				SignsPerMinute = (double)UserInput.Length / (SessionDuration);
+			else
+				SignsPerMinute = 0;
 		}
 		public void UpdateDisplay()
 		{
