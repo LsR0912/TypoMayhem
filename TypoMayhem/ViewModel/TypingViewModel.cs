@@ -25,6 +25,7 @@ namespace TypoMayhem.ViewModel
 		private int _incorrectPosition;
 		private int _errorCount;
 		private double _wordsPerMinute;
+		private double _signsPerMinute;
 		private string? _currentText;
 		private string? _userInput;
 		private char _typedCharacter;
@@ -43,6 +44,7 @@ namespace TypoMayhem.ViewModel
 		public int IncorrectPosition { get => _incorrectPosition; set => SetProperty(ref _incorrectPosition, value); }
 		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount, value); }
 		public double WordsPerMinute { get => _wordsPerMinute; set => SetProperty(ref _wordsPerMinute, value); }
+		public double SignsPerMinute { get => _signsPerMinute; set => SetProperty(ref _signsPerMinute, value); }
 		public List<int> IncorrectPositions { get; set; } = new List<int>();
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
 		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
@@ -51,7 +53,6 @@ namespace TypoMayhem.ViewModel
 		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
 		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
 		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
-
 
 		// Constructor
 		public TypingViewModel(TextBlock textBlock)
