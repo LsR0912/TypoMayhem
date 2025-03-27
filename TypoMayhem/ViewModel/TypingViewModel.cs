@@ -100,6 +100,7 @@ namespace TypoMayhem.ViewModel
 			IncorrectPositions.Clear();
 			UpdateDisplay();
 			CalculateWordsPerMinute();
+			CalculateSignsPerMinute();
 		}
 		public void ProcessKeyPress(KeyboardDevice keyboard, Key key)
 		{
@@ -147,6 +148,10 @@ namespace TypoMayhem.ViewModel
 		private void CalculateWordsPerMinute()
 		{
 			WordsPerMinute = (UserInput?.Split(' ').Length ?? 0) / (SessionDuration);
+		}
+		private void CalculateSignsPerMinute()
+		{
+			SignsPerMinute = Convert.ToDouble(UserInput?.Length / (SessionDuration));
 		}
 		public void UpdateDisplay()
 		{
