@@ -23,6 +23,7 @@ namespace TypoMayhem.ViewModel
 		private int _sessionDuration;
 		private int _currentPosition;
 		private int _incorrectPosition;
+		private int _errorCount;
 		private string? _currentText;
 		private string? _userInput;
 		private char _typedCharacter;
@@ -39,6 +40,7 @@ namespace TypoMayhem.ViewModel
 		public int[] SessionDurations => _sessionDurations;
 		public int CurrentPosition { get => _currentPosition; set => SetProperty(ref _currentPosition, value); }
 		public int IncorrectPosition { get => _incorrectPosition; set => SetProperty(ref _incorrectPosition, value); }
+		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount, value); }
 		public List<int> IncorrectPositions { get; set; } = new List<int>();
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
 		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
