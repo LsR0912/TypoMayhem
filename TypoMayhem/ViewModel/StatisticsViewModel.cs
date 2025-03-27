@@ -10,6 +10,18 @@ namespace TypoMayhem.ViewModel
 {
 	public class StatisticsViewModel : INotifyPropertyChanged
 	{
+		// Variables
+		private int _sessionDuration;
+		private int _errorCount;
+		private double _wordsPerMinute;
+		private double _signsPerMinute;
+
+		// Properties
+		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration,value); }
+		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount , value); }
+		public double WordsPerMinute { get => _wordsPerMinute; set => SetProperty(ref _wordsPerMinute, value); }
+		public double SignsPerMinute { get => _signsPerMinute; set => SetProperty(ref _signsPerMinute, value); }
+
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
