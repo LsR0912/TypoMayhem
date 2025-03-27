@@ -14,6 +14,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Threading;
 using TypoMayhem.Commands;
 using TypoMayhem.Data.Helpers;
+using TypoMayhem.View;
 
 namespace TypoMayhem.ViewModel
 {
@@ -167,6 +168,19 @@ namespace TypoMayhem.ViewModel
 				_textBlock.Inlines.Add(new InlineUIContainer(border));
 			}
 		}
+		private void InitializeStatisticsWindow()
+		{
+			StatisticsWindow statisticsWindow = new StatisticsWindow();
+			StatisticsViewModel statisticsViewModel = new()
+			{
+				SessionDuration = SessionDuration,
+				ErrorCount = ErrorCount,
+				WordsPerMinute = WordsPerMinute,
+				SignsPerMinute = SignsPerMinute
+			};
+			statisticsWindow.DataContext = statisticsViewModel;
+			statisticsWindow.Show();
+		}
 		private Brush GetBackgroundBrush(int position)
 		{
 			if (position < CurrentPosition)
@@ -220,8 +234,8 @@ namespace TypoMayhem.ViewModel
 			else
 			{
 				if (_timer != null) _timer.Stop();
-				MessageBox.Show("Time's up!");
 				StopTyping(null);
+				InitializeStatisticsWindow();
 			}
 		}
 	}
