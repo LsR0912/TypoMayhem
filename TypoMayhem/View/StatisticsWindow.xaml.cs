@@ -22,6 +22,13 @@ namespace TypoMayhem.View
         public StatisticsWindow()
         {
             InitializeComponent();
-        }
+			Owner = Application.Current.MainWindow;
+			WindowStartupLocation = WindowStartupLocation.CenterOwner;
+		}
+
+		private void CloseButton_Click(object sender, RoutedEventArgs e)
+		{
+            Close();
+		}
     }
 }
