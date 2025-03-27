@@ -78,8 +78,8 @@ namespace TypoMayhem.ViewModel
 		{
 			_isTyping = true;
 			CurrentPosition = 0;
+			ErrorCount = 0;
 			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
-			//_timer?.Start();
 			GenerateNewSentence();
 			UpdateDisplay();
 		}
@@ -133,8 +133,11 @@ namespace TypoMayhem.ViewModel
 			}
 			else
 			{
-				IncorrectPosition = CurrentPosition;
-				IncorrectPositions.Add(IncorrectPosition);
+				if(!IncorrectPositions.Contains(CurrentPosition))
+				{
+					IncorrectPositions.Add(CurrentPosition);
+					ErrorCount++;
+				}
 			}
 		}
 		public void UpdateDisplay()
