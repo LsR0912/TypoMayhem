@@ -68,8 +68,9 @@
                            Text="{Binding RemainingTime, StringFormat='{}{0:mm\\:ss}'}"
                            Style="{StaticResource RemainingTimeStyle}"/>
             </StatusBarItem>
+            <Label Content="Errors:"/>
             <StatusBarItem>
-                <TextBlock Text="Status Bar" />
+                <TextBlock Text="{Binding ErrorCount}" />
             </StatusBarItem>
         </StatusBar>
     </Grid>
