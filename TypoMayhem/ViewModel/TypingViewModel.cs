@@ -76,6 +76,8 @@ namespace TypoMayhem.ViewModel
 
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
+		public event EventHandler? SessionStarted;
+		public event EventHandler? SessionEnded;
 
 		// Methods
 		private void StartTyping(object? sender)
@@ -86,6 +88,7 @@ namespace TypoMayhem.ViewModel
 			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
 			GenerateNewSentence();
 			UpdateDisplay();
+			OnSessionStarted();
 		}
 		private void StopTyping(object? sender)
 		{
@@ -93,6 +96,7 @@ namespace TypoMayhem.ViewModel
 			_isTyping = false;
 			RemainingTime = TimeSpan.Zero;
 			ResetDisplay();
+			OnSessionEnded();
 		}
 		private void ResetDisplay()
 		{
@@ -230,6 +234,14 @@ namespace TypoMayhem.ViewModel
 			if (_isTyping) return false;
 			else return true;
 		}
+		protected virtual void OnSessionStarted()
+		{
+			SessionStarted?.Invoke(this, EventArgs.Empty);
+		}
+		protected virtual void OnSessionEnded()
+		{
+			SessionEnded?.Invoke(this, EventArgs.Empty);
+		}
 		private void OnTimerTick(object? sender, EventArgs e)
 		{
 			if (RemainingTime.TotalSeconds > 0)
@@ -243,5 +255,6 @@ namespace TypoMayhem.ViewModel
 				InitializeStatisticsWindow();
 			}
 		}
+		
 	}
 }

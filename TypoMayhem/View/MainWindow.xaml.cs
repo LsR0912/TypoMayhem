@@ -24,6 +24,8 @@ namespace TypoMayhem
 			InitialSettings();
 			DataContext = _viewModel;
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
+			if (_viewModel != null) _viewModel.SessionStarted += SessionStarted;
+			if (_viewModel != null) _viewModel.SessionEnded += SessionEnded;
 		}
 		private void InitialSettings()
 		{
@@ -38,7 +40,15 @@ namespace TypoMayhem
 
 			if (key == Key.LeftShift || key == Key.RightShift) return;
 
-			_viewModel.ProcessKeyPress(Keyboard.PrimaryDevice, key);
+			if (_viewModel != null) _viewModel.ProcessKeyPress(Keyboard.PrimaryDevice, key);
+		}
+		private void SessionStarted(object? sender, EventArgs e)
+		{
+			cbSessionDuration.IsEnabled = false;
+		}
+		private void SessionEnded(object? sender, EventArgs e)
+		{
+			cbSessionDuration.IsEnabled = true;
 		}
 	}
 }
