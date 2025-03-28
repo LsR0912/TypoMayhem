@@ -148,6 +148,7 @@ namespace TypoMayhem.ViewModel
 		}
 		private void CalculateWordsPerMinute()
 		{
+			if (UserInput != null && !UserInput.Contains(' ')) { return; }
 			WordsPerMinute = (UserInput?.Split(' ').Length ?? 0) / (SessionDuration);
 		}
 		private void CalculateSignsPerMinute()
@@ -157,6 +158,7 @@ namespace TypoMayhem.ViewModel
 			else
 				SignsPerMinute = 0;
 		}
+
 		public void UpdateDisplay()
 		{
 			_textBlock.Inlines.Clear();
