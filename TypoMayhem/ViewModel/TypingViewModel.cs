@@ -68,7 +68,7 @@ namespace TypoMayhem.ViewModel
 			StartTypingCommand = new RelayCommand(StartTyping, CanExecute);
 			StopTypingCommand = new RelayCommand(StopTyping);
 			NewCourseCommand = new RelayCommand(CreateNewCourse);
-			EditCourseCommand = new RelayCommand(EditCourse, CanExecute);
+			EditCourseCommand = new RelayCommand(EditCourse, CanEdit);
 			_typingCourses = new ObservableCollection<TypingCourse>()
 			{
 				new ("Default", ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] )
@@ -262,6 +262,11 @@ namespace TypoMayhem.ViewModel
 		private bool CanExecute(object? parameter)
 		{
 			if (_isTyping) return false;
+			else return true;
+		}
+		private bool CanEdit(object? parameter)
+		{
+			if(SelectedCourse.CourseName == "Default") return false;
 			else return true;
 		}
 		protected virtual void OnSessionStarted()
