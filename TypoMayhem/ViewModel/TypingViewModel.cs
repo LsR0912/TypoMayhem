@@ -79,6 +79,8 @@ namespace TypoMayhem.ViewModel
 			_timer.Tick += OnTimerTick;
 			TextGenerator.CourseText = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
 			_textBlock = textBlock;
+			_typingCourses = CourseHandler.LoadCoursesFromDirectory();
+			_selectedCourse = TypingCourses?.FirstOrDefault();
 		}
 
 		// Commands
@@ -297,9 +299,9 @@ namespace TypoMayhem.ViewModel
 
 		private void CourseEdited(TypingCourse course)
 		{
-			SelectedCourse = course;
 			CourseHandler.SaveCourseToFile(course);
 			TypingCourses = CourseHandler.LoadCoursesFromDirectory();
+			SelectedCourse = TypingCourses?.FirstOrDefault(c => c.CourseName == course.CourseName);
 		}
 
 		private void OnCourseCreated(TypingCourse course)
