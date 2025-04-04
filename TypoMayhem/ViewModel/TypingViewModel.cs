@@ -73,6 +73,9 @@ namespace TypoMayhem.ViewModel
 		// Commands
 		public ICommand StartTypingCommand { get; set; }
 		public ICommand StopTypingCommand { get; set; }
+		public ICommand NewCourseCommand { get; set; }
+		public ICommand EditCourseCommand { get; set; }
+		public ICommand DeleteCourseCommand { get; set; }
 
 		// Events
 		public event PropertyChangedEventHandler? PropertyChanged;
