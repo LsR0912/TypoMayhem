@@ -68,6 +68,7 @@ namespace TypoMayhem.ViewModel
 			StartTypingCommand = new RelayCommand(StartTyping, CanExecute);
 			StopTypingCommand = new RelayCommand(StopTyping);
 			NewCourseCommand = new RelayCommand(CreateNewCourse);
+			EditCourseCommand = new RelayCommand(EditCourse, CanExecute);
 			_typingCourses = new ObservableCollection<TypingCourse>();
 			SessionDuration = _sessionDurations[0];
 			CurrentText = "Press Start to begin a new Session.";
@@ -267,7 +268,7 @@ namespace TypoMayhem.ViewModel
 				InitializeStatisticsWindow();
 			}
 		}
-		public void CreateNewCourse(object sender)
+		private void CreateNewCourse(object sender)
 		{
 			var newCourseWindow = new NewCourseWindow()
 			{
@@ -278,6 +279,27 @@ namespace TypoMayhem.ViewModel
 				viewModel.CourseCreated += OnCourseCreated;
 			}
 			newCourseWindow.ShowDialog();
+		}
+		private void EditCourse(object? parameter)
+		{
+			var edtiCourseWindow = new EditCourseWindow
+			{
+				DataContext = new EditCourseViewModel()
+				{
+					CourseName = SelectedCourse?.CourseName,
+					CourseText = string.Join(Environment.NewLine, SelectedCourse.CourseText)
+				}
+			};
+			if (edtiCourseWindow.DataContext is EditCourseViewModel viewModel)
+				viewModel.CourseEdited += CourseEdited;
+			edtiCourseWindow.ShowDialog();
+		}
+
+		private void CourseEdited(TypingCourse course)
+		{
+			SelectedCourse = course;
+			CourseHandler.SaveCourseToFile(course);
+			TypingCourses = CourseHandler.LoadCoursesFromDirectory();
 		}
 
 		private void OnCourseCreated(TypingCourse course)
