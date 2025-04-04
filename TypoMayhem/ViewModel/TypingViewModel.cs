@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,6 +15,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Threading;
 using TypoMayhem.Commands;
 using TypoMayhem.Data.Helpers;
+using TypoMayhem.Model;
 using TypoMayhem.View;
 
 namespace TypoMayhem.ViewModel
@@ -35,6 +37,7 @@ namespace TypoMayhem.ViewModel
 		private DispatcherTimer? _timer;
 		private DateTime _startTime;
 		private TextBlock _textBlock;
+		private ObservableCollection<TypingCourse> _typingCourses;
 
 		// Array for Sessiondurations
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
@@ -54,12 +57,14 @@ namespace TypoMayhem.ViewModel
 		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
 		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
 		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
+		public ObservableCollection<TypingCourse> TypingCourses { get => _typingCourses; set => SetProperty(ref _typingCourses, value); }
 
 		// Constructor
 		public TypingViewModel(TextBlock textBlock)
 		{
 			StartTypingCommand = new RelayCommand(StartTyping, CanExecute);
 			StopTypingCommand = new RelayCommand(StopTyping);
+			_typingCourses = new ObservableCollection<TypingCourse>();
 			SessionDuration = _sessionDurations[0];
 			_timer = new DispatcherTimer()
 			{
@@ -165,7 +170,6 @@ namespace TypoMayhem.ViewModel
 			else
 				SignsPerMinute = 0;
 		}
-
 		public void UpdateDisplay()
 		{
 			_textBlock.Inlines.Clear();
@@ -258,6 +262,21 @@ namespace TypoMayhem.ViewModel
 				InitializeStatisticsWindow();
 			}
 		}
-		
+		public void CreateNewCourse(object sender)
+		{
+			var newCourseWindow = new NewCourseWindow()
+			{
+				DataContext = new CreateCourseViewModel()
+			};
+			if (newCourseWindow.DataContext is CreateCourseViewModel viewModel)
+			{
+				viewModel.CourseCreated += OnCourseCreated;
+			}
+		}
+
+		private void OnCourseCreated(TypingCourse course)
+		{
+			
+		}
 	}
 }
