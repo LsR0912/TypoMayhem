@@ -67,6 +67,7 @@ namespace TypoMayhem.ViewModel
 		{
 			StartTypingCommand = new RelayCommand(StartTyping, CanExecute);
 			StopTypingCommand = new RelayCommand(StopTyping);
+			NewCourseCommand = new RelayCommand(CreateNewCourse);
 			_typingCourses = new ObservableCollection<TypingCourse>();
 			SessionDuration = _sessionDurations[0];
 			_timer = new DispatcherTimer()
@@ -275,6 +276,7 @@ namespace TypoMayhem.ViewModel
 			{
 				viewModel.CourseCreated += OnCourseCreated;
 			}
+			newCourseWindow.ShowDialog();
 		}
 
 		private void OnCourseCreated(TypingCourse course)
