@@ -26,9 +26,19 @@
         <StackPanel Grid.Row="0"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
+            <StackPanel>
+                <Label Content="Course:"/>
+                <ComboBox x:Name="cbCourses"
+                          Style="{StaticResource CourseComboboxStyle}"
+                          ItemsSource="{Binding TypingCourses}"
+                          DisplayMemberPath="CourseName"
+                          SelectedItem="{Binding SelectedCourse, Mode=TwoWay}">
+                </ComboBox>
+            </StackPanel>
             <StackPanel HorizontalAlignment="Right">
                 <Label Content="Duration:"/>
                 <ComboBox x:Name="cbSessionDuration" 
+                          Style="{StaticResource SessionDurationCombobox}"
                           ItemsSource="{Binding SessionDurations}"
                           SelectedValue="{Binding SessionDuration, Mode=TwoWay}">
                 </ComboBox>

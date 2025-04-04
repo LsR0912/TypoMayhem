@@ -30,7 +30,7 @@
         </Style>
         <Style x:Key="SessionDurationCombobox" TargetType="ComboBox">
             <Setter Property="Width" Value="50"/>
-            <Setter Property="Height" Value="30"/>
+            <Setter Property="Height" Value="25"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="SelectedItem" Value="0"/>
@@ -73,6 +73,11 @@
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="CourseComboboxStyle" TargetType="ComboBox">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="DisplayMemberPath" Value="CourseName"/>
         </Style>
     </Application.Resources>
 </Application>

@@ -70,6 +70,7 @@ namespace TypoMayhem.ViewModel
 			NewCourseCommand = new RelayCommand(CreateNewCourse);
 			_typingCourses = new ObservableCollection<TypingCourse>();
 			SessionDuration = _sessionDurations[0];
+			CurrentText = "Press Start to begin a new Session.";
 			_timer = new DispatcherTimer()
 			{
 				Interval = TimeSpan.FromSeconds(1)
