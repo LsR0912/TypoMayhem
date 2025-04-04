@@ -72,6 +72,20 @@
             <StatusBarItem>
                 <TextBlock Text="{Binding ErrorCount}" />
             </StatusBarItem>
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal"
+                            Margin="190,0,0,0">
+                    <Button Content="New Course"
+                            Style="{StaticResource CourseButtonsStyle}"
+                            Command="{Binding NewCourseCommand}"/>
+                    <Button Content="Edit Course"
+                            Style="{StaticResource CourseButtonsStyle}"
+                            Command="{Binding EditCourseCommand}"/>
+                    <Button Content="Delete Course"
+                            Style="{StaticResource CourseButtonsStyle}"
+                            Command="{Binding DeleteCourseCommand}"/>
+                </StackPanel>
+            </StatusBarItem>
         </StatusBar>
     </Grid>
 </Window>

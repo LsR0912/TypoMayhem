@@ -64,5 +64,15 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
+        <Style x:Key="CourseButtonsStyle" TargetType="Button">
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="Orange" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
     </Application.Resources>
 </Application>
