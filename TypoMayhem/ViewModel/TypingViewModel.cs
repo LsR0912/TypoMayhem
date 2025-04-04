@@ -69,7 +69,10 @@ namespace TypoMayhem.ViewModel
 			StopTypingCommand = new RelayCommand(StopTyping);
 			NewCourseCommand = new RelayCommand(CreateNewCourse);
 			EditCourseCommand = new RelayCommand(EditCourse, CanExecute);
-			_typingCourses = new ObservableCollection<TypingCourse>();
+			_typingCourses = new ObservableCollection<TypingCourse>()
+			{
+				new ("Default", ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] )
+			};
 			SessionDuration = _sessionDurations[0];
 			CurrentText = "Press Start to begin a new Session.";
 			_timer = new DispatcherTimer()
@@ -77,9 +80,8 @@ namespace TypoMayhem.ViewModel
 				Interval = TimeSpan.FromSeconds(1)
 			};
 			_timer.Tick += OnTimerTick;
-			TextGenerator.CourseText = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
 			_textBlock = textBlock;
-			_typingCourses = CourseHandler.LoadCoursesFromDirectory();
+			InitTypingCourses();
 			_selectedCourse = TypingCourses?.FirstOrDefault();
 		}
 
@@ -230,8 +232,21 @@ namespace TypoMayhem.ViewModel
 		}
 		private void GenerateNewSentence()
 		{
-			CurrentText = TextGenerator.GenerateRandomCourseText(10);
-			IncorrectPositions.Clear();
+			if (TypingCourses != null)
+			{
+				SelectedCourse = TypingCourses.FirstOrDefault(c => c.CourseName == SelectedCourse?.CourseName);
+				TextGenerator.CourseText = SelectedCourse?.CourseText;
+				CurrentText = TextGenerator.GenerateRandomCourseText(10);
+				IncorrectPositions.Clear();
+			}
+		}
+		private void InitTypingCourses()
+		{
+			var courses = CourseHandler.LoadCoursesFromDirectory();
+			foreach (var course in courses)
+			{
+				_typingCourses.Add(course);
+			}
 		}
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
@@ -270,7 +285,7 @@ namespace TypoMayhem.ViewModel
 				InitializeStatisticsWindow();
 			}
 		}
-		private void CreateNewCourse(object sender)
+		private void CreateNewCourse(object? sender)
 		{
 			var newCourseWindow = new NewCourseWindow()
 			{
