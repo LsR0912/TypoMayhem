@@ -22,6 +22,14 @@ namespace TypoMayhem.View
 		public EditCourseWindow()
 		{
 			InitializeComponent();
+			Owner = Application.Current.MainWindow;
+			WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			DataContext = new ViewModel.EditCourseViewModel();
+		}
+		private void btnClose_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
 		}
 	}
 }
+
