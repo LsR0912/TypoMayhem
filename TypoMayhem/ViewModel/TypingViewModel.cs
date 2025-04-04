@@ -38,6 +38,7 @@ namespace TypoMayhem.ViewModel
 		private DateTime _startTime;
 		private TextBlock _textBlock;
 		private ObservableCollection<TypingCourse> _typingCourses;
+		private TypingCourse? _selectedCourse;
 
 		// Array for Sessiondurations
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
@@ -58,6 +59,8 @@ namespace TypoMayhem.ViewModel
 		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
 		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
 		public ObservableCollection<TypingCourse> TypingCourses { get => _typingCourses; set => SetProperty(ref _typingCourses, value); }
+		public TypingCourse? SelectedCourse { get => _selectedCourse; set => SetProperty(ref _selectedCourse, value); }
+
 
 		// Constructor
 		public TypingViewModel(TextBlock textBlock)
@@ -276,7 +279,10 @@ namespace TypoMayhem.ViewModel
 
 		private void OnCourseCreated(TypingCourse course)
 		{
-			
+			if (TypingCourses != null) TypingCourses.Add(course);
+			CourseHandler.SaveCourseToFile(course);
+			TypingCourses = CourseHandler.LoadCoursesFromDirectory();
+			if (TypingCourses != null) SelectedCourse = TypingCourses.Last();
 		}
 	}
 }
