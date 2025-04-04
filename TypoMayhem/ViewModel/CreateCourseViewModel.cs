@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using TypoMayhem.Commands;
 using TypoMayhem.Model;
@@ -39,9 +42,20 @@ namespace TypoMayhem.ViewModel
 
 		private void CreateCourse(object parameter)
 		{
-			var courseTextList = new List<string>(CourseText.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
-			var newCourse = new TypingCourse(CourseName, courseTextList);
-			CourseCreated?.Invoke(newCourse);
+			if (CourseText != null || CourseText != string.Empty && IsValidInput(CourseText))
+			{
+				var courseTextList = new List<string>(CourseText.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
+				var newCourse = new TypingCourse(CourseName, courseTextList);
+				CourseCreated?.Invoke(newCourse);
+			}
+			else if (CourseName == null || CourseName == string.Empty)
+			{
+				MessageBox.Show("Course name cannot be empty.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			else
+			{
+				MessageBox.Show("Invalid input. Please enter only alphanumeric characters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 		}
 
 		public event PropertyChangedEventHandler? PropertyChanged;
@@ -57,6 +71,16 @@ namespace TypoMayhem.ViewModel
 			field = value;
 			OnPropertyChanged(propertyName);
 			return true;
+		}
+
+		public static bool IsValidInput(string input)
+		{
+			if(input == null) return false;
+			// Create a Regex object
+			Regex regex = new Regex("^[a-z0-9]+$", RegexOptions.IgnoreCase);
+
+			// Match the input string against the regex
+			return regex.IsMatch(input);
 		}
 	}
 }
