@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TypoMayhem.ViewModel;
 
 namespace TypoMayhem.View
 {
@@ -22,6 +23,14 @@ namespace TypoMayhem.View
 		public NewCourseWindow()
 		{
 			InitializeComponent();
+			Owner = Application.Current.MainWindow;
+			WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			DataContext = new CreateCourseViewModel();
+		}
+
+		private void btnClose_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
 		}
 	}
 }
