@@ -45,10 +45,18 @@ namespace TypoMayhem
 		private void SessionStarted(object? sender, EventArgs e)
 		{
 			cbSessionDuration.IsEnabled = false;
+			cbCourses.IsEnabled = false;
+			btnNewCourse.IsEnabled = false;
+			btnEditCourse.IsEnabled = false;
+			btnDeleteCourse.IsEnabled = false;
 		}
 		private void SessionEnded(object? sender, EventArgs e)
 		{
 			cbSessionDuration.IsEnabled = true;
+			cbCourses.IsEnabled = true;
+			btnNewCourse.IsEnabled = true;
+			btnEditCourse.IsEnabled = true;
+			btnDeleteCourse.IsEnabled = true;
 		}
 	}
 }

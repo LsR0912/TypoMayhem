@@ -74,7 +74,9 @@ namespace TypoMayhem.ViewModel
 				new ("Default", ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] )
 			};
 			SessionDuration = _sessionDurations[0];
-			CurrentText = "Press Start to begin a new Session.";
+			CurrentText = "Press Start to begin a new Session.\n" +
+						  "The timer starts when you begin typing.\n" +
+						  "Press space when you reached the last word,\nto generate new ones.";
 			_timer = new DispatcherTimer()
 			{
 				Interval = TimeSpan.FromSeconds(1)
@@ -199,6 +201,7 @@ namespace TypoMayhem.ViewModel
 			StatisticsWindow statisticsWindow = new StatisticsWindow();
 			StatisticsViewModel statisticsViewModel = new()
 			{
+				CourseName = SelectedCourse?.CourseName,
 				SessionDuration = SessionDuration,
 				ErrorCount = ErrorCount,
 				WordsPerMinute = WordsPerMinute,
@@ -316,19 +319,17 @@ namespace TypoMayhem.ViewModel
 				viewModel.CourseEdited += CourseEdited;
 			edtiCourseWindow.ShowDialog();
 		}
-
 		private void CourseEdited(TypingCourse course)
 		{
 			CourseHandler.SaveCourseToFile(course);
 			TypingCourses = CourseHandler.LoadCoursesFromDirectory();
 			SelectedCourse = TypingCourses?.FirstOrDefault(c => c.CourseName == course.CourseName);
 		}
-
 		private void OnCourseCreated(TypingCourse course)
 		{
 			if (TypingCourses != null) TypingCourses.Add(course);
 			CourseHandler.SaveCourseToFile(course);
-			TypingCourses = CourseHandler.LoadCoursesFromDirectory();
+			//TypingCourses = CourseHandler.LoadCoursesFromDirectory();
 			if (TypingCourses != null) SelectedCourse = TypingCourses.Last();
 		}
 	}

@@ -15,12 +15,14 @@ namespace TypoMayhem.ViewModel
 		private int _errorCount;
 		private double _wordsPerMinute;
 		private double _signsPerMinute;
+		private string? _courseName;
 
 		// Properties
-		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration,value); }
-		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount , value); }
+		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
+		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount, value); }
 		public double WordsPerMinute { get => _wordsPerMinute; set => SetProperty(ref _wordsPerMinute, value); }
 		public double SignsPerMinute { get => _signsPerMinute; set => SetProperty(ref _signsPerMinute, value); }
+		public string? CourseName { get => _courseName; set => SetProperty(ref _courseName, value); }
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 

@@ -86,12 +86,15 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="190,0,0,0">
                     <Button Content="New Course"
+                            x:Name="btnNewCourse"
                             Style="{StaticResource CourseButtonsStyle}"
                             Command="{Binding NewCourseCommand}"/>
                     <Button Content="Edit Course"
+                            x:Name="btnEditCourse"
                             Style="{StaticResource CourseButtonsStyle}"
                             Command="{Binding EditCourseCommand}"/>
                     <Button Content="Delete Course"
+                            x:Name="btnDeleteCourse"                            
                             Style="{StaticResource CourseButtonsStyle}"
                             Command="{Binding DeleteCourseCommand}"/>
                 </StackPanel>
