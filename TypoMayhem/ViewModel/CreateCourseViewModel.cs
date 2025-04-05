@@ -42,7 +42,7 @@ namespace TypoMayhem.ViewModel
 
 		private void CreateCourse(object parameter)
 		{
-			if (CourseText != null || CourseText != string.Empty && IsValidInput(CourseText))
+			if (CourseText != null && CourseText != string.Empty && IsValidInput(CourseText))
 			{
 				var courseTextList = new List<string>(CourseText.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
 				var newCourse = new TypingCourse(CourseName, courseTextList);
@@ -77,7 +77,7 @@ namespace TypoMayhem.ViewModel
 		{
 			if(input == null) return false;
 			// Create a Regex object
-			Regex regex = new Regex("^[a-z0-9]+$", RegexOptions.IgnoreCase);
+			Regex regex = new Regex("^[a-z0-9\\s]+$", RegexOptions.IgnoreCase);
 
 			// Match the input string against the regex
 			return regex.IsMatch(input);
