@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using TypoMayhem.Commands;
 using TypoMayhem.Model;
@@ -30,8 +31,14 @@ namespace TypoMayhem.ViewModel
 		}
 		public void EditCourse(object sender)
 		{
-			var editedCourse = new TypingCourse(CourseName, CourseText.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
-			CourseEdited?.Invoke(editedCourse);
+			if ((CourseName != ""))
+			{
+				var editedCourse = new TypingCourse(CourseName, CourseText.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+				CourseEdited?.Invoke(editedCourse);
+			}else
+			{
+				MessageBox.Show("Please enter a course name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 		}
 		public event Action<TypingCourse>? CourseEdited;
 		public ICommand EditCourseCommand { get; }
