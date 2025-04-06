@@ -12,6 +12,8 @@ TypoMayhem is a WPF application designed to help users improve their typing skil
 - Calculation and display of Words Per Minute (WPM) and Signs Per Minute (SPM)
 - Error count tracking
 - Detailed statistics window
+- Support for multiple typing courses
+- Course management: create, edit, and delete custom typing courses
 
 ## Installation
 
@@ -23,12 +25,14 @@ TypoMayhem is a WPF application designed to help users improve their typing skil
 ## Usage
 
 1. Launch the application.
-2. Press the "Start" button to begin a typing session.
-3. Type the displayed text as accurately as possible.
-4. The application will highlight correct keystrokes in light green and incorrect keystrokes in red.
-5. The current position will be highlighted in yellow.
-6. The session will end when the timer runs out or when the user presses the "Stop" button.
-7. At the end of the session, a statistics window will display detailed typing statistics.
+2. Select a typing course from the available courses.
+3. Press the "Start" button to begin a typing session.
+4. Type the displayed text as accurately as possible.
+5. The application will highlight correct keystrokes in light green and incorrect keystrokes in red.
+6. The current position will be highlighted in yellow.
+7. The session will end when the timer runs out or when the user presses the "Stop" button.
+8. At the end of the session, a statistics window will display detailed typing statistics.
+
 
 ## Dependencies
 
@@ -42,6 +46,11 @@ TypoMayhem is a WPF application designed to help users improve their typing skil
 - `TypoMayhem/View/MainWindow.xaml.cs`: Contains the code-behind for the main user interface.
 - `TypoMayhem/Commands/RelayCommand.cs`: Implements the `ICommand` interface for handling commands.
 - `TypoMayhem/Data/Helpers/TextGenerator.cs`: Provides methods for generating random text for typing exercises.
+- `TypoMayhem/Data/Helpers/CourseHandler.cs`: Provides methods for loading and saving typing courses.
+- `TypoMayhem/ViewModel/CreateCourseViewModel.cs`: ViewModel for creating new typing courses.
+- `TypoMayhem/ViewModel/StatisticsViewModel.cs`: ViewModel for displaying typing statistics.
+- `TypoMayhem/View/StatisticsWindow.xaml`: Defines the layout for the statistics window.
+
 
 ## Contributing
 

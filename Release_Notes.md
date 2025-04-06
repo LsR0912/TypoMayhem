@@ -74,5 +74,38 @@ We are pleased to announce the release of TypoMayhem v2.0.0! This release introd
 - **Case Sensitivity**: The application currently does not handle case sensitivity for non-alphabetic characters.
 - **Special Characters**: Limited support for special characters in the typing exercises.
 
+
+# Release Notes for TypoMayhem v3.0.0
+
+## Release Date: April 06, 2025
+
+## Overview
+
+We are excited to announce the release of TypoMayhem v3.0.0! This release introduces new features, improvements, and bug fixes to enhance the user experience and provide more flexibility in typing practice.
+
+## New Features
+
+- **Typing Courses**: Added support for multiple typing courses. Users can now create, edit, and delete custom typing courses.
+- **Course Management**: New commands and UI elements for managing typing courses, including creating new courses, editing existing courses, and deleting courses.
+- **Course Selection**: Users can select a typing course from a list of available courses to practice with.
+
+## Improvements
+
+- **Session Events**: Added `SessionStarted` and `SessionEnded` events to notify when a typing session starts and ends.
+- **Session Reset**: Enhanced the reset functionality to clear the display and update statistics at the end of each session.
+
+## Bug Fixes
+
+- **Display Reset**: Ensured the display resets correctly when a new session starts or stops.
+- **WPM Calculation**: Fixed the calculation of Words Per Minute to handle cases where there are no spaces in the input.
+
+## Known Issues
+
+- **Case Sensitivity**: The application currently does not handle case sensitivity for non-alphabetic characters.
+- **Special Characters**: Limited support for special characters in the typing exercises.
+
    
+   
+
+
 
