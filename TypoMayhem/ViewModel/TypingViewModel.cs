@@ -327,9 +327,18 @@ namespace TypoMayhem.ViewModel
 		}
 		private void OnCourseCreated(TypingCourse course)
 		{
+			// write logic to check if the course already exists
+			if (TypingCourses != null)
+			{
+				var existingCourse = TypingCourses.FirstOrDefault(c => c.CourseName == course.CourseName);
+				if (existingCourse != null)
+				{
+					MessageBox.Show("Course already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					return;
+				}
+			}
 			if (TypingCourses != null) TypingCourses.Add(course);
 			CourseHandler.SaveCourseToFile(course);
-			//TypingCourses = CourseHandler.LoadCoursesFromDirectory();
 			if (TypingCourses != null) SelectedCourse = TypingCourses.Last();
 		}
 	}

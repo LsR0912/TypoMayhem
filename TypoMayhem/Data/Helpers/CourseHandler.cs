@@ -43,6 +43,12 @@ namespace TypoMayhem.Data.Helpers
 		{
 			try
 			{
+				if (!Directory.Exists(directoryPath))
+				{
+					Directory.CreateDirectory(directoryPath);
+					return new ObservableCollection<TypingCourse>();
+				}
+
 				var courseFiles = Directory.GetFiles(directoryPath, "*.txt");
 				var courses = new ObservableCollection<TypingCourse>();
 
