@@ -16,33 +16,33 @@ namespace TypoMayhem.ViewModel
 {
 	public class CreateCourseViewModel : INotifyPropertyChanged
 	{
-		private string _courseName;
-		private string _courseText;
+		private string? _courseName;
+		private string? _courseText;
 
-		public string CourseName
+		public string? CourseName
 		{
 			get => _courseName;
 			set => SetProperty(ref _courseName, value);
 		}
 
-		public string CourseText
+		public string? CourseText
 		{
 			get => _courseText;
 			set => SetProperty(ref _courseText, value);
 		}
 
-		public ICommand CreateCourseCommand { get; }
+		public ICommand? CreateCourseCommand { get; set; }
 
-		public event Action<TypingCourse> CourseCreated;
+		public event Action<TypingCourse>? CourseCreated;
 
 		public CreateCourseViewModel()
 		{
 			CreateCourseCommand = new RelayCommand(CreateCourse);
 		}
 
-		private void CreateCourse(object parameter)
+		private void CreateCourse(object? parameter)
 		{
-			if (CourseText != null && CourseText != string.Empty && IsValidInput(CourseText))
+			if (CourseName != null && CourseName != string.Empty && CourseText != null && CourseText != string.Empty && IsValidInput(CourseText))
 			{
 				var courseTextList = new List<string>(CourseText.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
 				var newCourse = new TypingCourse(CourseName, courseTextList);
@@ -75,7 +75,7 @@ namespace TypoMayhem.ViewModel
 
 		public static bool IsValidInput(string input)
 		{
-			if(input == null) return false;
+			if (input == null) return false;
 			// Create a Regex object
 			Regex regex = new Regex("^[a-z0-9\\s]+$", RegexOptions.IgnoreCase);
 
