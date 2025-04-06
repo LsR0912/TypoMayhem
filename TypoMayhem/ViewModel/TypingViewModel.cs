@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -61,7 +62,6 @@ namespace TypoMayhem.ViewModel
 		public ObservableCollection<TypingCourse> TypingCourses { get => _typingCourses; set => SetProperty(ref _typingCourses, value); }
 		public TypingCourse? SelectedCourse { get => _selectedCourse; set => SetProperty(ref _selectedCourse, value); }
 
-
 		// Constructor
 		public TypingViewModel(TextBlock textBlock)
 		{
@@ -69,6 +69,7 @@ namespace TypoMayhem.ViewModel
 			StopTypingCommand = new RelayCommand(StopTyping);
 			NewCourseCommand = new RelayCommand(CreateNewCourse);
 			EditCourseCommand = new RelayCommand(EditCourse, CanEdit);
+			DeleteCourseCommand = new RelayCommand(DeleteCourse,CanEdit);
 			_typingCourses = new ObservableCollection<TypingCourse>()
 			{
 				new ("Default", ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] )
@@ -318,6 +319,21 @@ namespace TypoMayhem.ViewModel
 			if (edtiCourseWindow.DataContext is EditCourseViewModel viewModel)
 				viewModel.CourseEdited += CourseEdited;
 			edtiCourseWindow.ShowDialog();
+		}
+		private void DeleteCourse(object? parameter)
+		{
+			if (SelectedCourse != null && TypingCourses != null)
+			{
+				var courseName = SelectedCourse.CourseName;
+				var filePath = Path.Combine("Courses", $"{courseName}.txt");
+				var restult = MessageBox.Show($"Are you sure you want to delete course: {courseName}?", "Delete Course", MessageBoxButton.YesNo);
+				if (restult == MessageBoxResult.Yes)
+				{
+					File.Delete(filePath);
+					TypingCourses.Remove(SelectedCourse);
+					SelectedCourse = TypingCourses.FirstOrDefault();
+				}
+			}
 		}
 		private void CourseEdited(TypingCourse course)
 		{
