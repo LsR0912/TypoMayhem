@@ -42,7 +42,7 @@ namespace TypoMayhem.ViewModel
 
 		private void CreateCourse(object? parameter)
 		{
-			if (CourseName != null && CourseName != string.Empty && CourseText != null && CourseText != string.Empty && IsValidInput(CourseText))
+			if (CourseName != null && CourseName != string.Empty && CourseText != null && CourseText != string.Empty)
 			{
 				var courseTextList = new List<string>(CourseText.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
 				var newCourse = new TypingCourse(CourseName, courseTextList);

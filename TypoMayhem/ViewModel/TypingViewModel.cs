@@ -69,15 +69,14 @@ namespace TypoMayhem.ViewModel
 			StopTypingCommand = new RelayCommand(StopTyping);
 			NewCourseCommand = new RelayCommand(CreateNewCourse);
 			EditCourseCommand = new RelayCommand(EditCourse, CanEdit);
-			DeleteCourseCommand = new RelayCommand(DeleteCourse,CanEdit);
+			DeleteCourseCommand = new RelayCommand(DeleteCourse, CanEdit);
 			_typingCourses = new ObservableCollection<TypingCourse>()
 			{
 				new ("Default", ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] )
 			};
 			SessionDuration = _sessionDurations[0];
 			CurrentText = "Press Start to begin a new Session.\n" +
-						  "The timer starts when you begin typing.\n" +
-						  "Press space when you reached the last word,\nto generate new ones.";
+						  "The timer starts when you begin typing.\n";
 			_timer = new DispatcherTimer()
 			{
 				Interval = TimeSpan.FromSeconds(1)
@@ -132,26 +131,25 @@ namespace TypoMayhem.ViewModel
 		{
 			if (_isTyping == true)
 			{
+				var lastChar = CurrentText.Last();
 				if (CurrentPosition < CurrentText?.Length)
 				{
 					_timer?.Start();
-					bool isShiftPressed = keyboard.IsKeyDown(Key.LeftShift) || keyboard.IsKeyDown(Key.RightShift);
-					char character = key == Key.Space ? ' ' : key.ToString().ToLower()[0];
-					char actualChar = isShiftPressed ? char.ToUpper(character) : character;
+					char character = KeyboardHandler.GetKeyChar(keyboard, key);
 
-					if (CurrentText != null && CurrentPosition < CurrentText.Length)
+					if (CurrentText != null)
 					{
 						char expectedChar = CurrentText[CurrentPosition];
-						ValidateKey(actualChar, expectedChar);
+						ValidateKey(character, expectedChar);
 						UpdateDisplay();
 					}
-				}
-				else
-				{
-					GenerateNewSentence();
-					IncorrectPositions.Clear();
-					CurrentPosition = 0;
-					UpdateDisplay();
+					if (CurrentPosition == CurrentText.Length)
+					{
+						GenerateNewSentence();
+						IncorrectPositions.Clear();
+						CurrentPosition = 0;
+						UpdateDisplay();
+					}
 				}
 			}
 		}
@@ -270,7 +268,7 @@ namespace TypoMayhem.ViewModel
 		}
 		private bool CanEdit(object? parameter)
 		{
-			if(SelectedCourse.CourseName == "Default") return false;
+			if (SelectedCourse.CourseName == "Default") return false;
 			else return true;
 		}
 		protected virtual void OnSessionStarted()
