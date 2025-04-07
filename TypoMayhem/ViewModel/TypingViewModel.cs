@@ -85,6 +85,7 @@ namespace TypoMayhem.ViewModel
 			_textBlock = textBlock;
 			InitTypingCourses();
 			_selectedCourse = TypingCourses?.FirstOrDefault();
+			StatisticsSaver.SaveStatistics(null);
 		}
 
 		// Commands
