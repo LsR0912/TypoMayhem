@@ -24,31 +24,32 @@ namespace TypoMayhem.ViewModel
 	public class TypingViewModel : INotifyPropertyChanged
 	{
 		// Variables
+		private int _errorCount;
 		private int _sessionDuration;
 		private int _currentPosition;
 		private int _incorrectPosition;
-		private int _errorCount;
 		private double _wordsPerMinute;
 		private double _signsPerMinute;
 		private string? _currentText;
 		private string? _userInput;
 		private char _typedCharacter;
 		private bool _isTyping;
-		private TimeSpan _remainingTime;
-		private DispatcherTimer? _timer;
 		private DateTime _startTime;
+		private TimeSpan _remainingTime;
 		private TextBlock _textBlock;
-		private ObservableCollection<TypingCourse> _typingCourses;
+		private DispatcherTimer? _timer;
 		private TypingCourse? _selectedCourse;
+
+		private ObservableCollection<TypingCourse>? _typingCourses;
 
 		// Array for Sessiondurations
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
 
 		// Properties
+		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount, value); }
 		public int[] SessionDurations => _sessionDurations;
 		public int CurrentPosition { get => _currentPosition; set => SetProperty(ref _currentPosition, value); }
 		public int IncorrectPosition { get => _incorrectPosition; set => SetProperty(ref _incorrectPosition, value); }
-		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount, value); }
 		public double WordsPerMinute { get => _wordsPerMinute; set => SetProperty(ref _wordsPerMinute, value); }
 		public double SignsPerMinute { get => _signsPerMinute; set => SetProperty(ref _signsPerMinute, value); }
 		public List<int> IncorrectPositions { get; set; } = new List<int>();
@@ -59,7 +60,7 @@ namespace TypoMayhem.ViewModel
 		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
 		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
 		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
-		public ObservableCollection<TypingCourse> TypingCourses { get => _typingCourses; set => SetProperty(ref _typingCourses, value); }
+		public ObservableCollection<TypingCourse>? TypingCourses { get => _typingCourses; set => SetProperty(ref _typingCourses, value); }
 		public TypingCourse? SelectedCourse { get => _selectedCourse; set => SetProperty(ref _selectedCourse, value); }
 
 		// Constructor
@@ -102,11 +103,7 @@ namespace TypoMayhem.ViewModel
 		// Methods
 		private void StartTyping(object? sender)
 		{
-			_isTyping = true;
-			UserInput = "";
-			CurrentPosition = 0;
-			ErrorCount = 0;
-			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
+			ResetSession();
 			GenerateNewSentence();
 			UpdateDisplay();
 			OnSessionStarted();
@@ -128,6 +125,14 @@ namespace TypoMayhem.ViewModel
 			UpdateDisplay();
 			CalculateWordsPerMinute();
 			CalculateSignsPerMinute();
+		}
+		private void ResetSession()
+		{
+			_isTyping = true;
+			UserInput = "";
+			CurrentPosition = 0;
+			ErrorCount = 0;
+			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
 		}
 		public void ProcessKeyPress(KeyboardDevice keyboard, Key key)
 		{
