@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TypoMayhem.Buttons;
 using TypoMayhem.ViewModel;
 
 namespace TypoMayhem
@@ -59,6 +60,22 @@ namespace TypoMayhem
 			btnNewCourse.IsEnabled = true;
 			btnEditCourse.IsEnabled = true;
 			btnDeleteCourse.IsEnabled = true;
+		}
+
+		private void sidebar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			var selected = sidebar.SelectedItem as NavButton;
+
+			navframe.Navigate(selected?.Navlink);
+			
+			cbCourses.Visibility = Visibility.Collapsed;
+			btnStart.Visibility = Visibility.Collapsed;
+			btnStop.Visibility = Visibility.Collapsed;
+			btnNewCourse.Visibility = Visibility.Collapsed;
+			btnEditCourse.Visibility = Visibility.Collapsed;
+			btnDeleteCourse.Visibility = Visibility.Collapsed;
+			txtMain.Visibility = Visibility.Collapsed;
+			animatedBorder.Visibility = Visibility.Collapsed;
 		}
 	}
 }
