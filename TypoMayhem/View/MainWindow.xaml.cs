@@ -39,6 +39,8 @@ namespace TypoMayhem
 			Key key = e.Key;
 
 			if (key == Key.LeftShift || key == Key.RightShift) return;
+			if (key == Key.LeftCtrl || key == Key.RightCtrl) return;
+			if (key == Key.LeftAlt || key == Key.RightAlt) return;
 
 			if (_viewModel != null) _viewModel.ProcessKeyPress(Keyboard.PrimaryDevice, key);
 		}

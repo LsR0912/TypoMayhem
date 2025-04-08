@@ -104,8 +104,59 @@ We are excited to announce the release of TypoMayhem v3.0.0! This release introd
 - **Case Sensitivity**: The application currently does not handle case sensitivity for non-alphabetic characters.
 - **Special Characters**: Limited support for special characters in the typing exercises.
 
+<<<<<<< HEAD
    
    
+=======
+# Release Notes - TypoMayhem v4.0.0
+
+## Overview
+TypoMayhem v4.0.0 introduces significant new features, improvements, and bug fixes to enhance the typing experience. This release focuses on providing better session management, detailed performance tracking, and robust course management capabilities.
+
+---
+
+## New Features
+
+### Keyboard Input Handling
+- **KeyboardHandler Integration**: 
+  - Added the `KeyboardHandler` utility to process keyboard input and map keys to characters.
+  - Supports special characters, numeric keys, and modifiers like Shift, Alt, and Control.
+  - Handles locale-specific characters such as `ä`, `ö`, `ü`, and `ß`.
+
+### Course Management
+- **Custom Courses**: Create, edit, and delete custom typing courses directly within the application.
+- **Default Course**: A default course is included for quick start.
+- **Dynamic Course Loading**: Courses are now loaded dynamically from the file system.
+
+### Statistics Tracking
+- **Session Summary**: View detailed session statistics, including error count, WPM, and SPM, in a dedicated statistics window.
+- **Persistent Statistics**: Save session statistics locally for future reference.
+
+---
+
+## Improvements
+- **UI Enhancements**:
+  - Improved text rendering with background highlights and drop shadow effects for better readability.
+  - Enhanced user feedback during typing sessions.
+- **Codebase Refactoring**:
+  - Optimized `TypingViewModel` for better maintainability and performance.
+  - Improved separation of concerns by delegating course handling to `CourseHandler`.
+
+---
+
+## Bug Fixes
+- Fixed an issue where incorrect positions were not cleared after generating a new sentence.
+- Resolved a crash when attempting to edit or delete the default course.
+- Addressed minor UI glitches in the statistics window.
+- Corrected WPM and SPM calculations to ensure accuracy.
+
+---
+
+## Notes
+This release marks a major milestone in TypoMayhem's development, focusing on usability, performance, and extensibility. We hope you enjoy the new features and improvements in v4.0.0!
+
+
+>>>>>>> release/4.0.0
 
 
 
