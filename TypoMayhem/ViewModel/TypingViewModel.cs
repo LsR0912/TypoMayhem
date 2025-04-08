@@ -228,7 +228,10 @@ namespace TypoMayhem.ViewModel
 				SignsPerMinute = SignsPerMinute,
 				Date = DateTime.Now
 			};
-			StatisticsSaver.SaveStatistics(statistic);
+			if (statistic.SignsPerMinute > 0)
+			{
+				StatisticsSaver.SaveStatistics(statistic);
+			}
 		}
 		private Brush GetBackgroundBrush(int position)
 		{
