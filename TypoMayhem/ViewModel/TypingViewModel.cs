@@ -74,7 +74,7 @@ namespace TypoMayhem.ViewModel
 			{
 				new ("Default", ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] )
 			};
-			SessionDuration = _sessionDurations[0];
+			SessionDuration = _sessionDurations[1];
 			CurrentText = "Press Start to begin a new Session.\n" +
 						  "The timer starts when you begin typing.\n";
 			_timer = new DispatcherTimer()
@@ -85,7 +85,6 @@ namespace TypoMayhem.ViewModel
 			_textBlock = textBlock;
 			InitTypingCourses();
 			_selectedCourse = TypingCourses?.FirstOrDefault();
-			StatisticsSaver.SaveStatistics(null);
 		}
 
 		// Commands
@@ -104,6 +103,7 @@ namespace TypoMayhem.ViewModel
 		private void StartTyping(object? sender)
 		{
 			_isTyping = true;
+			UserInput = "";
 			CurrentPosition = 0;
 			ErrorCount = 0;
 			RemainingTime = TimeSpan.FromMinutes(SessionDuration);
@@ -118,6 +118,7 @@ namespace TypoMayhem.ViewModel
 			RemainingTime = TimeSpan.Zero;
 			ResetDisplay();
 			OnSessionEnded();
+			SaveStatistics();
 		}
 		private void ResetDisplay()
 		{
@@ -209,6 +210,20 @@ namespace TypoMayhem.ViewModel
 			};
 			statisticsWindow.DataContext = statisticsViewModel;
 			statisticsWindow.Show();
+		}
+		private void SaveStatistics()
+		{
+			UserStatistic statistic = new UserStatistic
+			{
+				Id = Guid.NewGuid(),
+				CourseName = SelectedCourse?.CourseName,
+				SessionDuration = SessionDuration,
+				ErrorCount = ErrorCount,
+				WordsPerMinute = WordsPerMinute,
+				SignsPerMinute = SignsPerMinute,
+				Date = DateTime.Now
+			};
+			StatisticsSaver.SaveStatistics(statistic);
 		}
 		private Brush GetBackgroundBrush(int position)
 		{
