@@ -57,11 +57,6 @@ TypoMayhem is a WPF-based typing application designed to improve typing speed an
 8. At the end of the session, a statistics window will display detailed typing statistics.
 
 =======
-2. Select a typing course or create a new one.
-3. Set the session duration and press "Start" to begin typing.
-4. View real-time feedback and statistics during the session.
-5. After the session ends, review your performance in the statistics window.
-
 ---
 
 ## Project Structure
