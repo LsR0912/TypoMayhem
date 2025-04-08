@@ -6,7 +6,6 @@ TypoMayhem is a WPF-based typing application designed to improve typing speed an
 
 ## Features
 
-<<<<<<< HEAD
 - Typing exercises with customizable session durations
 - Real-time feedback on typing accuracy
 - Visual indication of correct and incorrect keystrokes
@@ -36,7 +35,6 @@ TypoMayhem is a WPF-based typing application designed to improve typing speed an
 - **Persistent Storage**: Save session statistics locally for future reference.
 
 ---
->>>>>>> release/4.0.0
 
 ## Installation
 
@@ -50,7 +48,6 @@ TypoMayhem is a WPF-based typing application designed to improve typing speed an
 ## Usage
 
 1. Launch the application.
-<<<<<<< HEAD
 2. Select a typing course from the available courses.
 3. Press the "Start" button to begin a typing session.
 4. Type the displayed text as accurately as possible.
@@ -64,13 +61,11 @@ TypoMayhem is a WPF-based typing application designed to improve typing speed an
 3. Set the session duration and press "Start" to begin typing.
 4. View real-time feedback and statistics during the session.
 5. After the session ends, review your performance in the statistics window.
->>>>>>> release/4.0.0
 
 ---
 
 ## Project Structure
 
-<<<<<<< HEAD
 - `TypoMayhem/ViewModel/TypingViewModel.cs`: Contains the main logic for the typing exercises, including handling user input, updating the display, and managing the timer.
 - `TypoMayhem/View/MainWindow.xaml`: Defines the main user interface layout.
 - `TypoMayhem/View/MainWindow.xaml.cs`: Contains the code-behind for the main user interface.
@@ -113,7 +108,6 @@ Displays session performance, including WPM, SPM, and error count.
 - **Visual Studio 2022**
 
 ---
->>>>>>> release/4.0.0
 
 ## Contributing
 
