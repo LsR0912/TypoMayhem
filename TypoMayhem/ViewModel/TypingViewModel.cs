@@ -115,7 +115,6 @@ namespace TypoMayhem.ViewModel
 			RemainingTime = TimeSpan.Zero;
 			ResetDisplay();
 			OnSessionEnded();
-			SaveStatistics();
 		}
 		private void ResetDisplay()
 		{
@@ -314,6 +313,7 @@ namespace TypoMayhem.ViewModel
 				if (_timer != null) _timer.Stop();
 				StopTyping(null);
 				InitializeStatisticsWindow();
+				SaveStatistics();
 			}
 		}
 		private void CreateNewCourse(object? sender)
