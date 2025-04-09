@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <TextBlock Text="Monthly Statistics"
+        <TextBlock Text="{Binding CurrentMonth, StringFormat='Statistics for {0}'}"
                    FontSize="24"
                    FontWeight="Bold"
                    HorizontalAlignment="Center"
@@ -30,7 +30,7 @@
                        FontSize="18"
                        FontWeight="Bold"
                        Margin="0,0,0,10" />
-            <TextBlock Text="{Binding TotalErros , StringFormat='Total Errors: {0}'}"
+            <TextBlock Text="{Binding TotalErrors , StringFormat='Total Errors: {0}'}"
                        FontSize="14" />
             <TextBlock Text="{Binding AvgWPM, StringFormat='Average Words Per Minute: {0}'}"
                        FontSize="14" />

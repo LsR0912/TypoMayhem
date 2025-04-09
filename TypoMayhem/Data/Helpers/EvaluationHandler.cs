@@ -47,5 +47,27 @@ namespace TypoMayhem.Data.Helpers
 			}
 			return errorcount;
 		}
+
+		public static double GetAverageWPM()
+		{
+			var wpm = 0.0;
+			var statistics = GetUserStatistics(year, month);
+			foreach (var userStatistic in statistics)
+			{
+				wpm += userStatistic.WordsPerMinute;
+			}
+			return wpm / statistics.Count;
+		}
+
+		public static int GetTotalSessionDuration()
+		{
+			var sessionDuration = 0;
+			var statistics = GetUserStatistics(year, month);
+			foreach (var userStatistic in statistics)
+			{
+				sessionDuration += userStatistic.SessionDuration;
+			}
+			return sessionDuration;
+		}
 	}
 }

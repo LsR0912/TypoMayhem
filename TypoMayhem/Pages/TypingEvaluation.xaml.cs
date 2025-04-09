@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TypoMayhem.ViewModel;
 
 namespace TypoMayhem.Pages
 {
@@ -20,9 +21,11 @@ namespace TypoMayhem.Pages
 	/// </summary>
 	public partial class TypingEvaluation : Page
 	{
+		private EvaluationViewModel? _viewModel = new EvaluationViewModel();
 		public TypingEvaluation()
 		{
 			InitializeComponent();
+			DataContext = _viewModel;
 		}
 	}
 }
