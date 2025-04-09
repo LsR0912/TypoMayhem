@@ -1,0 +1,108 @@
+﻿<Page x:Class="TypoMayhem.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TypoMayhem.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Style="{StaticResource StartStopStackpanel}">
+            <Button x:Name="btnStart"
+                    Content="Start"
+                    Command="{Binding StartTypingCommand}"
+                    Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="btnStop"
+                    Content="Stop"
+                    Command="{Binding StopTypingCommand}"
+                    Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <StackPanel>
+                <Label Content="Course:"/>
+                <ComboBox x:Name="cbCourses"
+                          Style="{StaticResource CourseComboboxStyle}"
+                          ItemsSource="{Binding TypingCourses}"
+                          DisplayMemberPath="CourseName"
+                          SelectedItem="{Binding SelectedCourse, Mode=TwoWay}">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right">
+                <Label Content="Duration:"/>
+                <ComboBox x:Name="cbSessionDuration" 
+                          Style="{StaticResource SessionDurationCombobox}"
+                          ItemsSource="{Binding SessionDurations}"
+                          SelectedValue="{Binding SessionDuration, Mode=TwoWay}">
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+        <Border x:Name="animatedBorder"
+                Style="{StaticResource AnimatedBorderStyle}">
+            <Border.Background>
+                <SolidColorBrush Color="#FFF3E5F5"/>
+            </Border.Background>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <!--Check definition of Storyboard-->
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:15" 
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                            From="#FFF3E5F5" To="#FFC3E5F5" 
+                                            AutoReverse="True" 
+                                            RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+            <TextBlock x:Name="txtMain" 
+                       Text="{Binding CurrentText}" 
+                       Style="{StaticResource TextMainStyle}">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" Opacity="0.5"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Border>
+        <StatusBar Style="{StaticResource StatusbarStyle}">
+            <Label Content="Remaining Time:"/>
+            <StatusBarItem>
+                <TextBlock x:Name="txtRemainingTime"
+                           Text="{Binding RemainingTime, StringFormat='{}{0:mm\\:ss}'}"
+                           Style="{StaticResource RemainingTimeStyle}"/>
+            </StatusBarItem>
+            <Label Content="Errors:"/>
+            <StatusBarItem>
+                <TextBlock Text="{Binding ErrorCount}" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal"
+                            Margin="130,0,0,0">
+                    <Button Content="New Course"
+                            x:Name="btnNewCourse"
+                            Style="{StaticResource CourseButtonsStyle}"
+                            Command="{Binding NewCourseCommand}"/>
+                    <Button Content="Edit Course"
+                            x:Name="btnEditCourse"
+                            Style="{StaticResource CourseButtonsStyle}"
+                            Command="{Binding EditCourseCommand}"/>
+                    <Button Content="Delete Course"
+                            x:Name="btnDeleteCourse"                            
+                            Style="{StaticResource CourseButtonsStyle}"
+                            Command="{Binding DeleteCourseCommand}"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+
+    </Grid>
+</Page>
