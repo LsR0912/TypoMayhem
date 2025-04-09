@@ -5,21 +5,47 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TypoMayhem.Model;
 
 namespace TypoMayhem.Data.Helpers
 {
 	public static class EvaluationHandler
 	{
-		private static string folderPath = $"Statistics\\{DateTime.Now.Year}";
+		private static string folderPath = $"Statistics";
+		public static string year = DateTime.Now.Year.ToString();
+		public static string month = DateTime.Now.ToString("MMMM");
 
-		public static void LoadCurrentMonth(string month)
+		public static List<UserStatistic> GetUserStatistics(string year, string month)
 		{
-			var currentMonth = Path.Combine(folderPath, month);
-			var files = Directory.GetFiles(currentMonth);
-			foreach (var file in files)
+			var userStatistics = new List<UserStatistic>();
+			var filePath = Path.Combine(folderPath, year, month);
+
+			if (Directory.Exists(filePath))
 			{
-				var existingContent = File.ReadAllText(file);
+				var files = Directory.GetFiles(filePath);
+
+				foreach (var file in files)
+				{
+					var fileContent = File.ReadAllText(file);
+					var results = JsonConvert.DeserializeObject<List<UserStatistic>>(fileContent);
+					if (results != null)
+					{
+						userStatistics.AddRange(results);
+					}
+				}
 			}
+			return userStatistics;
+		}
+
+		public static int GetTotalErrorCount()
+		{
+			var errorcount = 0;
+			var statistics = GetUserStatistics(year, month);
+			foreach (var userStatistic in statistics)
+			{
+				errorcount += userStatistic.ErrorCount;
+			}
+			return errorcount;
 		}
 	}
 }
