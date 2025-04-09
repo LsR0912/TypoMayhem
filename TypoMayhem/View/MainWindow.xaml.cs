@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TypoMayhem.Buttons;
+using TypoMayhem.Data.Helpers;
 using TypoMayhem.ViewModel;
 
 namespace TypoMayhem
@@ -27,6 +28,7 @@ namespace TypoMayhem
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
 			if (_viewModel != null) _viewModel.SessionStarted += SessionStarted;
 			if (_viewModel != null) _viewModel.SessionEnded += SessionEnded;
+			EvaluationHandler.LoadCurrentMonth(DateTime.Now.ToString("MMMM"));
 		}
 		private void InitialSettings()
 		{
