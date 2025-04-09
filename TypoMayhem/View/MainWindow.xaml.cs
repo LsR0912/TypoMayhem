@@ -52,6 +52,8 @@ namespace TypoMayhem
 			btnNewCourse.IsEnabled = false;
 			btnEditCourse.IsEnabled = false;
 			btnDeleteCourse.IsEnabled = false;
+			btnMainWindow.IsEnabled = false;
+			btnEvaluate.IsEnabled = false;
 		}
 		private void SessionEnded(object? sender, EventArgs e)
 		{
@@ -60,22 +62,46 @@ namespace TypoMayhem
 			btnNewCourse.IsEnabled = true;
 			btnEditCourse.IsEnabled = true;
 			btnDeleteCourse.IsEnabled = true;
+			btnMainWindow.IsEnabled = true;
+			btnEvaluate.IsEnabled = true;
 		}
 
 		private void sidebar_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var selected = sidebar.SelectedItem as NavButton;
 
-			navframe.Navigate(selected?.Navlink);
-			
-			cbCourses.Visibility = Visibility.Collapsed;
-			btnStart.Visibility = Visibility.Collapsed;
-			btnStop.Visibility = Visibility.Collapsed;
-			btnNewCourse.Visibility = Visibility.Collapsed;
-			btnEditCourse.Visibility = Visibility.Collapsed;
-			btnDeleteCourse.Visibility = Visibility.Collapsed;
+			if (selected == null) return;
+			switch (selected.Name)
+			{
+				case "btnMainWindow": ShowMainWindow(); break;
+				case "btnEvaluate":
+					ShowEvaluationPage(selected);
+					break;
+			}
+		}
+		private void HideMainWindow()
+		{
+			stkHeader.Visibility = Visibility.Collapsed;
+			stkFooter.Visibility = Visibility.Collapsed;
 			txtMain.Visibility = Visibility.Collapsed;
 			animatedBorder.Visibility = Visibility.Collapsed;
+			stkCombobox.Visibility = Visibility.Collapsed;
+			statusbar.Visibility = Visibility.Collapsed;
+		}
+		private void ShowMainWindow()
+		{
+			stkHeader.Visibility = Visibility.Visible;
+			stkFooter.Visibility = Visibility.Visible;
+			txtMain.Visibility = Visibility.Visible;
+			animatedBorder.Visibility = Visibility.Visible;
+			stkCombobox.Visibility = Visibility.Visible;
+			statusbar.Visibility = Visibility.Visible;
+		}
+		private void ShowEvaluationPage(object? obj)
+		{
+			var sender = obj as NavButton;
+			HideMainWindow();
+			if (sender != null) navframe.Navigate(sender.Navlink);
 		}
 	}
 }
