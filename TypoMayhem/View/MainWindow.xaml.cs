@@ -87,6 +87,7 @@ namespace TypoMayhem
 			animatedBorder.Visibility = Visibility.Collapsed;
 			stkCombobox.Visibility = Visibility.Collapsed;
 			statusbar.Visibility = Visibility.Collapsed;
+			navframe.Visibility = Visibility.Visible;
 		}
 		private void ShowMainWindow()
 		{
@@ -96,6 +97,7 @@ namespace TypoMayhem
 			animatedBorder.Visibility = Visibility.Visible;
 			stkCombobox.Visibility = Visibility.Visible;
 			statusbar.Visibility = Visibility.Visible;
+			navframe.Visibility = Visibility.Collapsed;
 		}
 		private void ShowEvaluationPage(object? obj)
 		{
