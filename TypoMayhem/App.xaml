@@ -12,6 +12,20 @@
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                            Background="#FF6A00"
+                            BorderThickness="1">
+                            <ContentPresenter
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="{TemplateBinding Padding}" ></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Effect">
