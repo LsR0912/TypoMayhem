@@ -46,46 +46,34 @@ namespace TypoMayhem.ViewModel
 		private int[] _sessionDurations = new int[] { 1, 2, 3, 4, 5, 10 };
 
 		// Properties
-		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount, value); }
 		public int[] SessionDurations => _sessionDurations;
-		public int CurrentPosition { get => _currentPosition; set => SetProperty(ref _currentPosition, value); }
-		public int IncorrectPosition { get => _incorrectPosition; set => SetProperty(ref _incorrectPosition, value); }
+		public List<int> IncorrectPositions { get; set; } = new List<int>();
+		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
+		public char TypedCharacter { get => _typedCharacter; set => _typedCharacter = value; }
+		public int ErrorCount { get => _errorCount; set => SetProperty(ref _errorCount, value); }
+		public string? UserInput { get => _userInput; set => SetProperty(ref _userInput, value); }
+		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
+		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
+		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
 		public double WordsPerMinute { get => _wordsPerMinute; set => SetProperty(ref _wordsPerMinute, value); }
 		public double SignsPerMinute { get => _signsPerMinute; set => SetProperty(ref _signsPerMinute, value); }
-		public List<int> IncorrectPositions { get; set; } = new List<int>();
 		public int SessionDuration { get => _sessionDuration; set => SetProperty(ref _sessionDuration, value); }
-		public string? CurrentText { get => _currentText; set => SetProperty(ref _currentText, value); }
-		public string? UserInput { get => _userInput; set => SetProperty(ref _userInput, value); }
-		public char TypedCharacter { get => _typedCharacter; set => _typedCharacter = value; }
-		public bool IsTyping { get => _isTyping; set => SetProperty(ref _isTyping, value); }
-		public TimeSpan RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
-		public DateTime StartTime { get => _startTime; set => SetProperty(ref _startTime, value); }
-		public ObservableCollection<TypingCourse>? TypingCourses { get => _typingCourses; set => SetProperty(ref _typingCourses, value); }
+		public int CurrentPosition { get => _currentPosition; set => SetProperty(ref _currentPosition, value); }
+		public int IncorrectPosition { get => _incorrectPosition; set => SetProperty(ref _incorrectPosition, value); }
 		public TypingCourse? SelectedCourse { get => _selectedCourse; set => SetProperty(ref _selectedCourse, value); }
+		public ObservableCollection<TypingCourse>? TypingCourses { get => _typingCourses; set => SetProperty(ref _typingCourses, value); }
 
 		// Constructor
 		public TypingViewModel(TextBlock textBlock)
 		{
+			InitTypingCourses();
+			InitComponents();
 			StartTypingCommand = new RelayCommand(StartTyping, CanExecute);
 			StopTypingCommand = new RelayCommand(StopTyping);
 			NewCourseCommand = new RelayCommand(CreateNewCourse);
 			EditCourseCommand = new RelayCommand(EditCourse, CanEdit);
 			DeleteCourseCommand = new RelayCommand(DeleteCourse, CanEdit);
-			_typingCourses = new ObservableCollection<TypingCourse>()
-			{
-				new ("Default", ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] )
-			};
-			SessionDuration = _sessionDurations[1];
-			CurrentText = "Press Start to begin a new Session.\n" +
-						  "The timer starts when you begin typing.\n";
-			_timer = new DispatcherTimer()
-			{
-				Interval = TimeSpan.FromSeconds(1)
-			};
-			_timer.Tick += OnTimerTick;
 			_textBlock = textBlock;
-			InitTypingCourses();
-			_selectedCourse = TypingCourses?.FirstOrDefault();
 		}
 
 		// Commands
@@ -96,9 +84,9 @@ namespace TypoMayhem.ViewModel
 		public ICommand DeleteCourseCommand { get; set; }
 
 		// Events
-		public event PropertyChangedEventHandler? PropertyChanged;
 		public event EventHandler? SessionStarted;
 		public event EventHandler? SessionEnded;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		// Methods
 		private void StartTyping(object? sender)
@@ -115,7 +103,6 @@ namespace TypoMayhem.ViewModel
 			RemainingTime = TimeSpan.Zero;
 			ResetDisplay();
 			OnSessionEnded();
-			SaveStatistics();
 		}
 		private void ResetDisplay()
 		{
@@ -184,7 +171,7 @@ namespace TypoMayhem.ViewModel
 		private void CalculateSignsPerMinute()
 		{
 			if (UserInput != null && SessionDuration > 0)
-				SignsPerMinute = (double)UserInput.Length / (SessionDuration);
+				SignsPerMinute = (double)UserInput.Replace(" ", "").Length / (SessionDuration);
 			else
 				SignsPerMinute = 0;
 		}
@@ -268,11 +255,28 @@ namespace TypoMayhem.ViewModel
 		}
 		private void InitTypingCourses()
 		{
+			_typingCourses = new ObservableCollection<TypingCourse>()
+			{
+				new ("Default", ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] )
+			};
+
 			var courses = CourseHandler.LoadCoursesFromDirectory();
 			foreach (var course in courses)
 			{
 				_typingCourses.Add(course);
 			}
+		}
+		private void InitComponents()
+		{
+			SessionDuration = _sessionDurations[1];
+			CurrentText = "Press Start to begin a new Session.\n" +
+						  "The timer starts when you begin typing.\n";
+			_timer = new DispatcherTimer()
+			{
+				Interval = TimeSpan.FromSeconds(1)
+			};
+			_timer.Tick += OnTimerTick;
+			_selectedCourse = TypingCourses?.FirstOrDefault();
 		}
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
@@ -292,6 +296,7 @@ namespace TypoMayhem.ViewModel
 		}
 		private bool CanEdit(object? parameter)
 		{
+			if (SelectedCourse == null) return false;
 			if (SelectedCourse.CourseName == "Default") return false;
 			else return true;
 		}
@@ -314,6 +319,7 @@ namespace TypoMayhem.ViewModel
 				if (_timer != null) _timer.Stop();
 				StopTyping(null);
 				InitializeStatisticsWindow();
+				SaveStatistics();
 			}
 		}
 		private void CreateNewCourse(object? sender)
@@ -330,17 +336,20 @@ namespace TypoMayhem.ViewModel
 		}
 		private void EditCourse(object? parameter)
 		{
-			var edtiCourseWindow = new EditCourseWindow
+			if (SelectedCourse != null)
 			{
-				DataContext = new EditCourseViewModel()
+				var edtiCourseWindow = new EditCourseWindow
 				{
-					CourseName = SelectedCourse?.CourseName,
-					CourseText = string.Join(Environment.NewLine, SelectedCourse.CourseText)
-				}
-			};
-			if (edtiCourseWindow.DataContext is EditCourseViewModel viewModel)
-				viewModel.CourseEdited += CourseEdited;
-			edtiCourseWindow.ShowDialog();
+					DataContext = new EditCourseViewModel()
+					{
+						CourseName = SelectedCourse?.CourseName,
+						CourseText = string.Join(Environment.NewLine, SelectedCourse.CourseText)
+					}
+				};
+				if (edtiCourseWindow.DataContext is EditCourseViewModel viewModel)
+					viewModel.CourseEdited += CourseEdited;
+				edtiCourseWindow.ShowDialog();
+			}
 		}
 		private void DeleteCourse(object? parameter)
 		{
