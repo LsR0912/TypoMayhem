@@ -36,9 +36,6 @@ TypoMayhem is a WPF-based typing application designed to improve typing speed an
 
 
 
-
-
-
 ## Installation
 
 1. Clone the repository:
@@ -59,9 +56,6 @@ Displays session performance, including WPM, SPM, and error count.
 
 ## Requirements
 - **Visual Studio 2022**
-
----
->>>>>>> release/4.0.0
 
 ## Contributing
 
