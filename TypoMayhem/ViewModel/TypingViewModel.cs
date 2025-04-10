@@ -183,7 +183,7 @@ namespace TypoMayhem.ViewModel
 		private void CalculateSignsPerMinute()
 		{
 			if (UserInput != null && SessionDuration > 0)
-				SignsPerMinute = (double)UserInput.Length / (SessionDuration);
+				SignsPerMinute = (double)UserInput.Replace(" ","").Length / (SessionDuration);
 			else
 				SignsPerMinute = 0;
 		}
